@@ -1,0 +1,25 @@
+.navbar{
+
+  .nav-link.sign-up-link{
+    border: 1px solid black;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 0.125rem;
+  }
+
+  .nav-login-links{
+    flex-direction: row;
+    margin-left: 10px;
+  }
+
+}
+
+
+@media screen and (max-width: 991px ){
+  .nav-login-links{
+    position: absolute;
+    right: 93px;
+    top: 7px;
+    margin-left: 0;
+  }
+}

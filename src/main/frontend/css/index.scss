@@ -1,0 +1,18 @@
+/*
+ Bootstrap material css
+*/
+@import "~bootstrap-material-design/dist/css/bootstrap-material-design.css";
+
+
+.home-card__img{
+    height: 251px;
+    width: 90%;
+    margin: auto;
+}
+
+.home-card-container{
+    margin-top: 20px;
+}
+
+@import "footer";
+@import "header";
