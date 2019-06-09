@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>store</title>
-        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="../css/app.css">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -60,7 +60,7 @@
                     <div class="row">
                         <div class="col-lg-4 home-card-container">
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top home-card__img" src="img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                            <img class="card-img-top home-card__img" src="../img/example.jpg" alt="Card image cap" height="200px" width="50px">
                             <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -70,7 +70,7 @@
                     </div>
                         <div class="col-lg-4 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="../img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -80,7 +80,7 @@
                         </div>
                         <div class="col-lg-4 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="../img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -90,7 +90,7 @@
                         </div>
                         <div class="col-lg-4 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="../img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -100,7 +100,7 @@
                         </div>
                         <div class="col-lg-4 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="../img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -110,7 +110,7 @@
                         </div>
                         <div class="col-lg-4 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="../img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -140,6 +140,6 @@
         <div class="footer">
             <div class="container"></div>
         </div>
-        <script src="js/app.js"></script>
+        <script src="../js/app.js"></script>
     </body>
 </html>

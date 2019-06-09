@@ -11205,3 +11205,8 @@ h6 {
     top: 7px;
     margin-left: 0; } }
 
+.login-form {
+  width: 300px;
+  height: 500px;
+  margin: 30px auto 0 auto; }
+
