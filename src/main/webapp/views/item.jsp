@@ -72,10 +72,10 @@
             </div>
             <div class="col-lg-10 col-md-8">
                 <div class="row mt-2">
-                    <div class="col-lg-5">
+                    <div class="col-lg-4">
                         <img src="http://localhost:9090/img/example.jpg" class="img-thumbnail item-img m-auto" alt="">
                     </div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-8">
                         <div class="item">
                             <div class="item__title">Headphone X</div>
                             <div class="item__description mt-2">

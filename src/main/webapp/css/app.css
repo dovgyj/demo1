@@ -15588,7 +15588,7 @@ readers do not read off random characters that represent icons */
   height: fit-content; }
 
 .item-img {
-  max-width: 400px;
+  max-width: 100%;
   height: 600px;
   display: block; }
 
