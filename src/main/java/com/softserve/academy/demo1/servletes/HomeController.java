@@ -13,7 +13,7 @@ import java.io.IOException;
 public class HomeController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/views/index.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("index.jsp");
         rd.forward(request,response);
     }
 }

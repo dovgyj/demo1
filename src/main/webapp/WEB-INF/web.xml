@@ -12,16 +12,28 @@
     <servlet-name>Login</servlet-name>
     <servlet-class>com.softserve.academy.demo1.servletes.LoginController</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Register</servlet-name>
+    <servlet-class>com.softserve.academy.demo1.servletes.RegisterController</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Item</servlet-name>
+    <servlet-class>com.softserve.academy.demo1.servletes.ItemController</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Index</servlet-name>
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>Index</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>Login</servlet-name>
     <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Register</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Item</servlet-name>
+    <url-pattern>/item/1</url-pattern>
   </servlet-mapping>
 </web-app>

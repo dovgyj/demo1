@@ -1,17 +1,18 @@
 <%--
   Created by IntelliJ IDEA.
   User: Andrii
-  Date: 09/06/2019
-  Time: 11:30
+  Date: 10/06/2019
+  Time: 03:02
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <html>
 <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="css/app.css">
+    <title>Item</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css">
 </head>
-<body class="bg-green">
+<body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="http://localhost:9090/">Demo1.com</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,22 +52,31 @@
         </li>
     </ul>
 </nav>
-
-    <form class="login-form">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+<div class="mt-2">
+    <div class="row">
+        <div class="col-lg-2 col-md-4">
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action active">
+                    Cras justo odio
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+                <a href="#" class="list-group-item list-group-item-action">Vestibulum at eros</a>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+        <div class="col-lg-10 col-md-8">
+            <div class="row">
+                <div class="col-lg-5">
+                    <img src="${pageContext.request.contextPath}/img/example.jpg" class="img-thumbnail item__img" alt="">
+            </div>
+            </div>
         </div>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck1">
-            <label class="custom-control-label mt-1" for="customCheck1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-outline-primary mt-3">Submit</button>
-    </form>
-  <script src="js/app.js"></script>
+    </div>
+</div>
+<div class="footer">
+    <div class="container"></div>
+</div>
+<script src="${pageContext.request.contextPath}/js/app.js"></script>
 </body>
 </html>

@@ -11183,6 +11183,9 @@ h6 {
 .home-card-container {
   margin-top: 20px; }
 
+.bg-green {
+  background: #009688; }
+
 .footer {
   height: 300px;
   background: #2f2f2f;
@@ -11208,5 +11211,12 @@ h6 {
 .login-form {
   width: 300px;
   height: 500px;
-  margin: 30px auto 0 auto; }
+  margin: 60px auto 0 auto;
+  padding: 20px;
+  background: white;
+  height: fit-content; }
+
+.item__img {
+  max-width: 400px;
+  height: 600px; }
 
