@@ -1,4 +1,23 @@
-.item__img{
+.item-img{
   max-width: 400px;
   height: 600px;
+  display: block;
+}
+
+.item{
+  padding: 10px 20px;
+  background: #ffffff;
+}
+
+.item__title{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.item__shopping-basket-icon{
+  font-size: 20px;
+}
+
+.item__price{
+  font-size: 30px;
 }

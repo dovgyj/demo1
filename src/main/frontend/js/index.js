@@ -9,10 +9,12 @@ window.Popper = Popper;
 
 require('bootstrap-material-design');
 
-window.onload = function () {
-    document.getElementById("password1").onchange = validatePassword;
-    document.getElementById("password2").onchange = validatePassword;
-}
+require("@fortawesome/fontawesome-free");
+
+// window.onload = function () {
+//     document.getElementById("password1").onchange = validatePassword;
+//     document.getElementById("password2").onchange = validatePassword;
+// }
 /*function validatePassword(){
     alert("fire");
     var pass2=document.getElementById("password2").value;

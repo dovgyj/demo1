@@ -3,6 +3,11 @@
 */
 @import "~bootstrap-material-design/dist/css/bootstrap-material-design.css";
 
+/*
+Font awosome
+ */
+
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
 
 .home-card__img{
     height: 251px;
@@ -19,7 +24,16 @@
     background: #009688;
 }
 
+.bg-light-gray{
+    background: rgba(153, 153, 153, 0.2);
+}
+
 @import "footer";
 @import "header";
 @import "login";
 @import "item";
+@import "home";
+
+.categories__item{
+    background: rgba(153, 153, 153, 0.2);
+}

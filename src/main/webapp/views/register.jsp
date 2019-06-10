@@ -29,7 +29,7 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
         </form>
         <%--                <div class="dropdown">--%>
         <%--                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
@@ -43,6 +43,11 @@
         <%--                </div>--%>
     </div>
     <ul class="navbar-nav nav-login-links">
+        <li class="nav-item">
+            <a href="" class="nav-link nav-link-shopping-basket">
+                <i class="fas fa-shopping-basket"></i>
+            </a>
+        </li>
         <li class="nav-item">
             <a class="nav-link" href="http://localhost:9090/login">Sign in <span class="sr-only">(current)</span></a>
         </li>
@@ -74,5 +79,6 @@
     <button type="submit" class="btn btn-outline-primary mt-3">Register</button>
 </form>
 <script src="js/app.js"></script>
+<script src="https://kit.fontawesome.com/1b4c0b7880.js"></script>
 </body>
 </html>
