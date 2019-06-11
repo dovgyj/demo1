@@ -15609,6 +15609,22 @@ readers do not read off random characters that represent icons */
 .item-preview__price {
   font-weight: bold; }
 
+.about {
+  width: 100%;
+  background: white;
+  padding: 20px; }
+
+.about__img {
+  width: 90%;
+  margin: auto;
+  display: block; }
+
+.about__heading {
+  text-align: center; }
+
+.about__heading--small {
+  text-align: left; }
+
 .categories__item {
   background: rgba(153, 153, 153, 0.2); }
 

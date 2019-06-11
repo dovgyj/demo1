@@ -2,7 +2,10 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
-<web-app>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
     <servlet-name>Index</servlet-name>
@@ -20,6 +23,10 @@
     <servlet-name>Item</servlet-name>
     <servlet-class>com.softserve.academy.demo1.servletes.ItemController</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>About</servlet-name>
+    <servlet-class>com.softserve.academy.demo1.servletes.AboutController</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Index</servlet-name>
     <url-pattern>/index</url-pattern>
@@ -35,5 +42,9 @@
   <servlet-mapping>
     <servlet-name>Item</servlet-name>
     <url-pattern>/item/1</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>About</servlet-name>
+    <url-pattern>/about</url-pattern>
   </servlet-mapping>
 </web-app>

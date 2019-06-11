@@ -1,4 +1,4 @@
-import "../css/index.scss";
+//import "../css/index.scss";
 
 import jQuery from "jquery";
 window.$ = jQuery;
