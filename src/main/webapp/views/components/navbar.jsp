@@ -30,7 +30,7 @@
     </div>
     <ul class="navbar-nav nav-login-links">
         <li class="nav-item">
-            <a href="" class="nav-link nav-link-shopping-basket">
+            <a href="${pageContext.request.contextPath}/bin" class="nav-link nav-link-shopping-basket">
                 <i class="fas fa-shopping-basket"></i>
             </a>
         </li>

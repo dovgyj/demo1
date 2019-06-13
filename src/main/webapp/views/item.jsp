@@ -10,7 +10,8 @@
 <html>
 <head>
     <title>Item</title>
-    <link rel="stylesheet" href="http://localhost:9090/css/app.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://localhost:9090/static/css/app.css">
 </head>
 <body class="bg-light-gray">
 <jsp:include page="components/navbar.jsp"/>
@@ -31,7 +32,7 @@
             <div class="col-lg-10 col-md-8">
                 <div class="row mt-2">
                     <div class="col-lg-4">
-                        <img src="http://localhost:9090/img/example.jpg" class="img-thumbnail item-img m-auto" alt="">
+                        <img src="http://localhost:9090/static/img/example.jpg" class="img-thumbnail item-img m-auto" alt="">
                     </div>
                     <div class="col-lg-8">
                         <div class="item">

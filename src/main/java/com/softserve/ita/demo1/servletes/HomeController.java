@@ -1,4 +1,4 @@
-package com.softserve.academy.demo1.servletes;
+package com.softserve.ita.demo1.servletes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

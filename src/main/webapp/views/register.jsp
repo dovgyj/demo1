@@ -9,7 +9,8 @@
 <html>
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/app.css">
 </head>
 <body class="bg-green">
 <jsp:include page="components/navbar.jsp" />
@@ -35,7 +36,7 @@
 
     <button type="submit" class="btn btn-outline-primary mt-3">Register</button>
 </form>
-<script src="js/app.js"></script>
+<script src="static/js/app.js"></script>
 <script src="https://kit.fontawesome.com/1b4c0b7880.js"></script>
 </body>
 </html>

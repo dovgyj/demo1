@@ -2,7 +2,8 @@
 <html>
     <head>
         <title>store</title>
-        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="/static/css/app.css">
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
     </head>
     <body>
     <jsp:include page="views/components/navbar.jsp" />
@@ -12,7 +13,10 @@
             <div class="row">
                 <div class="col-lg-2 col-md-4 mt-3">
                     <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action active">
+<%--                        <a href="#" class="list-group-item list-group-item-action active">--%>
+<%--                            All--%>
+<%--                        </a>--%>
+                        <a href="#" class="list-group-item list-group-item-action categories__item">
                             Headphones
                         </a>
                         <a href="#" class="list-group-item list-group-item-action categories__item">Tablets</a>
@@ -24,7 +28,7 @@
                     <div class="row">
                         <div class="col-lg-3 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Headphone X</h5>
                                     <h6 class="item-preview__price">900grn</h6>
@@ -38,7 +42,7 @@
                         </div>
                         <div class="col-lg-3 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Headphone X</h5>
                                     <h6 class="item-preview__price">900grn</h6>
@@ -52,7 +56,7 @@
                         </div>
                         <div class="col-lg-3 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Headphone X</h5>
                                     <h6 class="item-preview__price">900grn</h6>
@@ -66,7 +70,7 @@
                         </div>
                         <div class="col-lg-3 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Headphone X</h5>
                                     <h6 class="item-preview__price">900grn</h6>
@@ -80,7 +84,7 @@
                         </div>
                         <div class="col-lg-3 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Headphone X</h5>
                                     <h6 class="item-preview__price">900grn</h6>
@@ -94,7 +98,7 @@
                         </div>
                         <div class="col-lg-3 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Headphone X</h5>
                                     <h6 class="item-preview__price">900grn</h6>
