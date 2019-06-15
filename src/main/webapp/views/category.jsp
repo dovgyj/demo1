@@ -14,20 +14,13 @@
         <div class="row">
             <div class="col-lg-2 col-md-4 mt-3">
                 <div class="list-group">
-                    ${categoryName}
+                    ${activeCategory.name}
                     <c:forEach var="category" items="${categories}">
-                        <c:choose>
-                            <c:when test="${category == categoryName}">
-                                <a href="${pageContext.request.contextPath + "/category/" + category}" class="list-group-item list-group-item-action active categories__item">
-                                        ${category}
-                                </a>
-                            </c:when>
-                            <c:otherwise>
-                                <a href="${pageContext.request.contextPath + "/category/" + category}" class="list-group-item list-group-item-action categories__item">
-                                        ${category}
-                                </a>
-                            </c:otherwise>
-                        </c:choose>
+                        <a href="/categories/${category.alias}" class="list-group-item list-group-item-action categories__item ">
+                            <h3>
+                                <c:out value="${category.name}"/>
+                            </h3>
+                        </a>
                     </c:forEach>
                 </div>
             </div>

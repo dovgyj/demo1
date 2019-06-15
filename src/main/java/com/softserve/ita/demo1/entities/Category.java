@@ -30,21 +30,6 @@ public class Category {
         return "/category/" + alias;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return id == category.id &&
-                name.equals(category.name) &&
-                alias.equals(category.alias);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, alias);
-    }
-
     public void setAlias(String alias) {
         this.alias = alias;
     }
@@ -60,4 +45,21 @@ public class Category {
     public String getAlias() {
         return alias;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return id == category.id &&
+                name.equals(category.name) &&
+                alias.equals(category.alias);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, alias);
+    }
+
 }

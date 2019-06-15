@@ -95,8 +95,16 @@
     margin-left: 10px;
 }
 
-.navbar .nav-link-shopping-basket{
+.navbar .nav-link.nav-link-shopping-basket{
     font-size: 23px;
+    position: relative;
+}
+
+.shoping-basket-badge{
+    position: absolute;
+    font-size: 11px;
+    top: 0px;
+    right: -4px;
 }
 
 

@@ -32,6 +32,7 @@
         <li class="nav-item">
             <a href="${pageContext.request.contextPath}/bin" class="nav-link nav-link-shopping-basket">
                 <i class="fas fa-shopping-basket"></i>
+                <span class="badge badge-primary badge-pill shoping-basket-badge">2</span>
             </a>
         </li>
         <li class="nav-item">
