@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
@@ -6,7 +7,7 @@
         <link rel="stylesheet" href="/static/css/app.css">
     </head>
     <body>
-    <jsp:include page="views/components/navbar.jsp" />
+    <jsp:include page="components/navbar.jsp" />
 
 
         <div class="mt-2">
@@ -14,22 +15,18 @@
             <div class="row">
                 <div class="col-lg-2 col-md-4 mt-3">
                     <div class="list-group">
-<%--                        <a href="#" class="list-group-item list-group-item-action active">--%>
-<%--                            All--%>
-<%--                        </a>--%>
-                        <a href="#" class="list-group-item list-group-item-action categories__item">
-                            Headphones
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action categories__item">Tablets</a>
-                        <a href="#" class="list-group-item list-group-item-action categories__item">Mobile phones</a>
-                        <a href="#" class="list-group-item list-group-item-action categories__item">Laptops</a>
+                        <c:forEach var="category" items="${categories}">
+                            <a href="/category/${category.alias}" class="list-group-item list-group-item-action categories__item ">
+                                <c:out value="${category.name}"/>
+                            </a>
+                        </c:forEach>
                     </div>
                 </div>
                 <div class="col-lg-10 col-md-8">
                     <div class="row">
                         <div class="col-lg-3 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="../static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Headphone X</h5>
                                     <h6 class="item-preview__price">900grn</h6>
@@ -43,7 +40,7 @@
                         </div>
                         <div class="col-lg-3 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="../static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Headphone X</h5>
                                     <h6 class="item-preview__price">900grn</h6>
@@ -57,7 +54,7 @@
                         </div>
                         <div class="col-lg-3 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="../static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Headphone X</h5>
                                     <h6 class="item-preview__price">900grn</h6>
@@ -71,7 +68,7 @@
                         </div>
                         <div class="col-lg-3 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="../static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Headphone X</h5>
                                     <h6 class="item-preview__price">900grn</h6>
@@ -85,7 +82,7 @@
                         </div>
                         <div class="col-lg-3 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="../static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Headphone X</h5>
                                     <h6 class="item-preview__price">900grn</h6>
@@ -99,7 +96,7 @@
                         </div>
                         <div class="col-lg-3 home-card-container">
                             <div class="card" style="width: 18rem;">
-                                <img class="card-img-top home-card__img" src="static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <img class="card-img-top home-card__img" src="../static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
                                 <div class="card-body">
                                     <h5 class="card-title">Headphone X</h5>
                                     <h6 class="item-preview__price">900grn</h6>
@@ -132,6 +129,6 @@
             </nav>
         </div>
 
-        <%@ include file="views/components/footer.jsp" %>
+        <%@ include file="components/footer.jsp" %>
     </body>
 </html>

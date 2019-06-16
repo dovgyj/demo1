@@ -25,7 +25,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 
     @Override
     public Category getByAlias(String alias){
-        String query = "SELECT name,alias,id FROM categories"
+        String query = "SELECT categories.name,categories.alias,categories.id FROM categories "
                 + "WHERE alias = ?";
 
         try {

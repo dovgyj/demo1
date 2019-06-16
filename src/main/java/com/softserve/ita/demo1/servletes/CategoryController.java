@@ -14,6 +14,7 @@ import java.util.List;
 public class CategoryController extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         CategoryService service = new CategoryServiceImpl();
         String path = request.getPathInfo();
         String categoryAlias = path.split("/")[1];
