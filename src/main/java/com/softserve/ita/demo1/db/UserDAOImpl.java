@@ -69,6 +69,38 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public User getByEmail(String email){
+        String query = "SELECT id,name,email,role,password FROM users"
+                + " WHERE email = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1,email);
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.first() != false){
+                User user = new User();
+                user.setId(resultSet.getInt(1));
+                user.setName(resultSet.getNString(2));
+                user.setEmail(resultSet.getNString(3));
+                user.setRole(resultSet.getNString(4));
+                user.setPassword(resultSet.getNString(5));
+
+                return user;
+            }else{
+                return null;
+            }
+
+
+        }catch (SQLException e){
+            System.out.println("Cannot execute getByEmailAndPassword in UserDAO");
+            LOGGER.error("Cannot execute getByEmailAndPassword in UserDAO");
+        }
+
+        return null;
+    }
+
+    @Override
     public void delete(Integer id) {
 
     }

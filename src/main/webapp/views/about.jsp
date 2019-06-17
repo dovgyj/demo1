@@ -19,7 +19,7 @@
 <div class="container mt-3">
     <div class="about">
         <h1 class="about__heading mb-0">About Us</h1>
-        <img src="${pageContext.request.contextPath}/img/team.png" class="about__img mt-0 mb-3" alt="">
+        <img src="${pageContext.request.contextPath}/static/img/team.png" class="about__img mt-0 mb-3" alt="">
         <h3 class="about__heading about__heading--small">How it works</h3>
         <p class="about__text">We do not use the phrase "documentation comments", instead using the common term ... That is, while the examples are in Google Style, they may not illustrate the only .... No line break before the opening brace. ... (Note that this is not the same practice used in Google style for other languages, such as C++ and JavaScript.).</p>
         <h3 class="about__heading about__heading--small">How it works</h3>

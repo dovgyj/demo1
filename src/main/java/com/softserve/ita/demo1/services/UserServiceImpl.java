@@ -53,4 +53,14 @@ public class UserServiceImpl implements UserService {
 
         userDAO.delete(id);
     }
+
+    @Override
+    public User getByEmail(String email){
+
+        if(email == null || email.isEmpty()){
+            throw new IllegalArgumentException("Email must be present");
+        }
+
+        return userDAO.getByEmail(email);
+    }
 }

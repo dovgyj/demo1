@@ -7,4 +7,5 @@ public interface UserService {
     void update(User user);
     void add(User user);
     void delete(Integer id);
+    User getByEmail(String email);
 }

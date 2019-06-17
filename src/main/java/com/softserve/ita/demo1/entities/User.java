@@ -15,13 +15,14 @@ public class User {
     private UserRole role;
 
     public User(){
-
+        this.role = UserRole.USER;
     }
 
     public User(String name, String password, String email) {
         this.name = name;
         this.password = password;
         this.email = email;
+        this.role = UserRole.USER;
     }
 
     public Integer getId() {

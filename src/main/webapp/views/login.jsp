@@ -15,14 +15,14 @@
 <body class="bg-green">
 <jsp:include page="components/navbar.jsp" />
 
-    <form class="login-form">
+    <form class="login-form" method="post" action="/login">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
         </div>
         <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="customCheck1">

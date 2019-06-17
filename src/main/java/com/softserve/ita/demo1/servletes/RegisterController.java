@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import com.softserve.ita.demo1.services.UserService;
 import com.softserve.ita.demo1.services.UserServiceImpl;
+import com.softserve.ita.demo1.util.AuthManager;
 import com.softserve.ita.demo1.util.SecurityManager;
 
 public class RegisterController extends HttpServlet {
@@ -38,7 +39,11 @@ public class RegisterController extends HttpServlet {
         User user = new User(name,passwordHash,email);
         service.add(user);
 
-        resp.sendRedirect("/");
+
+        AuthManager authManager = (AuthManager) req.getAttribute("Auth");
+        authManager.login(user);
+
+        resp.sendRedirect("/home");
 
     }
 }
