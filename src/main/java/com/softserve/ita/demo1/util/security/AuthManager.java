@@ -43,15 +43,13 @@ public class AuthManager {
     }
 
     public boolean tryLogin(String password, String email) {
-        String hashPassword = securityManager.hashPassword(password);
 
         User user = userService.getByEmail(email);
 
-        if (user != null && securityManager.checkPass(password, hashPassword)) {
+        if (user != null && securityManager.checkPass(password, user.getPassword())) {
             this.login(user);
             return true;
         }
-
         return false;
     }
 
@@ -66,6 +64,8 @@ public class AuthManager {
     public void logout() {
         this.user = null;
         this.session.removeAttribute("auntificatedUser");
+        this.deleteCookieFromDatabase();
+        this.deleteCookieFromClient();
     }
 
     public User getUser() {
@@ -93,25 +93,25 @@ public class AuthManager {
         }
     }
 
-    public void deleteCookieFromDatabase(){
+    public void deleteCookieFromDatabase() {
         Gson gson = new Gson();
         Cookie[] reqCookies = this.httpServletRequest.getCookies();
         if (reqCookies != null) {
             for (Cookie cookie : reqCookies) {
                 if (cookie.getName().equals("remember-me")) {
-                    RememberMeCookie rememberMeCookie = gson.fromJson(cookie.getValue(),RememberMeCookie.class);
+                    RememberMeCookie rememberMeCookie = gson.fromJson(cookie.getValue(), RememberMeCookie.class);
                     this.auntificationService.delete(rememberMeCookie.getSelector());
                 }
             }
         }
     }
 
-    public void setRememberMeCookie(){
-        String selector = securityManager.generateSelector();
-        String validator = securityManager.generateRememberMeToken();
-        String hasedValidator = securityManager.hashRememberMeToken(validator);
+    public void setRememberMeCookie() {
+        String selector = this.securityManager.generateSelector();
+        String validator = this.securityManager.generateRememberMeToken();
+        String hasedValidator = this.securityManager.hashRememberMeToken(validator);
 
-        RememberMeCookie rememberMeCookie = new RememberMeCookie(selector,hasedValidator);
+        RememberMeCookie rememberMeCookie = new RememberMeCookie(selector, hasedValidator);
 
         Auntification auntification = new Auntification();
         auntification.setUserId(this.getUser().getId());
@@ -123,14 +123,14 @@ public class AuthManager {
         Cookie cookie = new Cookie("remember-me", this.gson.toJson(rememberMeCookie));
 
         cookie.setPath("/");
-        cookie.setDomain("localhost");
+        cookie.setDomain(this.httpServletRequest.getServerName());
         cookie.setMaxAge(60 * 60 * 24 * 30);
         this.httpServletResponse.addCookie(cookie);
     }
 
-    public void deleteCookieFromClient(){
+    public void deleteCookieFromClient() {
         Cookie cookie = new Cookie("remember-me", "");
-        cookie.setDomain("localhost");
+        cookie.setDomain(this.httpServletRequest.getServerName());
         cookie.setPath("/");
         cookie.setMaxAge(0);
         this.httpServletResponse.addCookie(cookie);

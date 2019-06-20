@@ -27,7 +27,7 @@
     </div>
     <div class="form-group">
     <label for="password1" name="password">Password</label>
-    <input type="password" class="form-control" id="password1" placeholder="Password" required minlength="6">
+    <input type="password" class="form-control" id="password1" name="password" placeholder="Password" required minlength="6">
     </div>
     <div class="form-group">
         <label for="password2">Confirm password</label>
@@ -41,5 +41,6 @@
 <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
 <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
 <script src="https://kit.fontawesome.com/1b4c0b7880.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/register.js"></script>
 </body>
 </html>

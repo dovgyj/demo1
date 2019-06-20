@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Andrii
@@ -18,11 +19,16 @@
     <form class="login-form" method="post" action="/login">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input value="admin@gmail.com" type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+            <input value="admin@gmail.com" type="email" name="email" class="form-control <c:out value="${not empty error ? 'is-invalid':''}"></c:out>" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input value="123456" type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+            <input type="password" name="password" class="form-control <c:out value="${not empty error ? 'is-invalid':''}"></c:out>" id="exampleInputPassword1" placeholder="Password" required minlength="6">
+            <c:if test="${not empty error}">
+                <div class="invalid-feedback">
+                    <c:out value="${error}"></c:out>
+                </div>
+            </c:if>
         </div>
         <div class="custom-control custom-checkbox">
             <input name="check_me_out" value="check_me_out" type="checkbox" class="custom-control-input" id="customCheck1">
@@ -36,5 +42,6 @@
     <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
     <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
     <script src="https://kit.fontawesome.com/1b4c0b7880.js"></script>
+
 </body>
 </html>

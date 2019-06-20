@@ -33,49 +33,16 @@ public class LoginController extends HttpServlet {
         //validation
 
         AuthManager authManager = (AuthManager) req.getAttribute("Auth");
-        SecurityManager securityManager = new SecurityManager();
 
         if(authManager.tryLogin(password, email)){
 
-            AuntificationService auntificationService = new AuntificationServiceImpl();
-            Gson gson = new Gson();
-            Cookie[] reqCookies = req.getCookies();
-            if (reqCookies != null) {
-                for (Cookie cookie : reqCookies) {
-                    if (cookie.getName().equals("remember-me")) {
-                        RememberMeCookie rememberMeCookie = gson.fromJson(cookie.getValue(),RememberMeCookie.class);
-                        auntificationService.delete(rememberMeCookie.getSelector());
-                    }
-                }
-            }
+            authManager.deleteCookieFromDatabase();
 
             if (req.getParameter("check_me_out") != null && req.getParameter("check_me_out").equals("check_me_out")) {
 
-                String selector = securityManager.generateSelector();
-                String validator = securityManager.generateRememberMeToken();
-                String hasedValidator = securityManager.hashRememberMeToken(validator);
-
-                RememberMeCookie rememberMeCookie = new RememberMeCookie(selector,hasedValidator);
-
-                Auntification auntification = new Auntification();
-                auntification.setUserId(authManager.getUser().getId());
-                auntification.setSelector(selector);
-                auntification.setValidator(validator);
-
-                auntificationService.add(auntification);
-
-                Cookie cookie = new Cookie("remember-me", gson.toJson(rememberMeCookie));
-
-                cookie.setPath("/");
-                cookie.setDomain("localhost");
-                cookie.setMaxAge(60 * 60 * 24 * 30);
-                resp.addCookie(cookie);
+                authManager.setRememberMeCookie();
             } else {
-                Cookie cookie = new Cookie("remember-me", "");
-                cookie.setDomain("localhost");
-                cookie.setPath("/");
-                cookie.setMaxAge(0);
-                resp.addCookie(cookie);
+                authManager.deleteCookieFromClient();
             }
 
             if(authManager.getUser().isAdmin()){

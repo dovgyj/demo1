@@ -30,7 +30,7 @@ public class RequestAuthFilter implements Filter {
 
         HttpSession session = req.getSession(true);
 
-        AuthManager authManager = new AuthManager(session);
+        AuthManager authManager = new AuthManager(session,res,req);
 
         if (authManager.guest()) {
             Gson gson = new Gson();
