@@ -107,6 +107,11 @@
     right: -4px;
 }
 
+.dropdown-menu-right{
+    right:0;
+    left: auto;
+}
+
 
 
 @media screen and (max-width: 991px ){

@@ -1,7 +1,5 @@
 package com.softserve.ita.demo1.servletes;
 
-import com.softserve.ita.demo1.db.UserDAO;
-import com.softserve.ita.demo1.db.UserDAOImpl;
 import com.softserve.ita.demo1.entities.User;
 
 import javax.servlet.RequestDispatcher;
@@ -13,8 +11,8 @@ import java.io.IOException;
 
 import com.softserve.ita.demo1.services.UserService;
 import com.softserve.ita.demo1.services.UserServiceImpl;
-import com.softserve.ita.demo1.util.AuthManager;
-import com.softserve.ita.demo1.util.SecurityManager;
+import com.softserve.ita.demo1.util.security.AuthManager;
+import com.softserve.ita.demo1.util.security.SecurityManager;
 
 public class RegisterController extends HttpServlet {
 

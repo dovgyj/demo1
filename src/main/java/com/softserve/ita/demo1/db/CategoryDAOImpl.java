@@ -47,18 +47,24 @@ public class CategoryDAOImpl implements CategoryDAO {
         }catch (SQLException e){
             System.out.println("Cannot execute `getByAliasAll category dao.");
             LOGGER.error("Cannot execute `getByAliasAll category dao.");
-            return null;
+
         }
+
+        return null;
     }
 
     @Override
     public List<Category> getAll() {
+
         String query = "SELECT categories.id, categories.name, categories.alias "
                 + "FROM categories";
 
+
+        PreparedStatement statement = null;
+
         try {
 
-            PreparedStatement statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement(query);
             ResultSet categoryData = statement.executeQuery();
             List<Category> categories = new ArrayList<>();
             while (categoryData.next()) {
@@ -76,8 +82,18 @@ public class CategoryDAOImpl implements CategoryDAO {
             e.printStackTrace();
             System.err.println("Cannot execute 'getAll' category dao.");
             LOGGER.error("Cannot execute 'getAll' category dao.", e);
-            return null;
+
+        }finally {
+            if(statement != null){
+                try {
+                    statement.close();
+                }catch (SQLException e){
+
+                }
+            }
+
         }
+        return null;
     }
 
     @Override

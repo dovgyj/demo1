@@ -18,20 +18,23 @@
     <form class="login-form" method="post" action="/login">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+            <input value="admin@gmail.com" type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+            <input value="123456" type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
         </div>
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck1">
             <label class="custom-control-label mt-1" for="customCheck1">Check me out</label>
+            <input name="chek_me_out" value="chek_me_out" type="checkbox" class="custom-control-input" id="customCheck1">
         </div>
         <button type="submit" class="btn btn-outline-primary mt-3">Submit</button>
     </form>
 
-  <script src="static/js/app.js"></script>
-  <script src="https://kit.fontawesome.com/1b4c0b7880.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+    <script src="https://kit.fontawesome.com/1b4c0b7880.js"></script>
 </body>
 </html>

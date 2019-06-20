@@ -1,8 +1,11 @@
 package com.softserve.ita.demo1.filters;
 
-import com.softserve.ita.demo1.util.AuthManager;
+import com.google.gson.Gson;
+import com.softserve.ita.demo1.util.security.AuthManager;
+import com.softserve.ita.demo1.util.security.RememberMeCookie;
 
 import javax.servlet.*;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,18 +32,22 @@ public class RequestAuthFilter implements Filter{
 
         AuthManager authManager = new AuthManager(session);
 
+        if(authManager.guest()){
+            Gson gson = new Gson();
+            Cookie[] reqCookies = req.getCookies();
+            if (reqCookies != null) {
+                for (Cookie cookie : reqCookies) {
+                    if (cookie.getName().equals("remember-me")) {
+                        RememberMeCookie rememberMeCookie = gson.fromJson(cookie.getValue(),RememberMeCookie.class);
+                        authManager.tryLoginByCookie(rememberMeCookie);
+                    }
+                }
+            }
+        }
+
         request.setAttribute("Auth", authManager);
 
         chain.doFilter(request, response);
-
-        /*if(session == null && !(uri.endsWith("html") || uri.endsWith("LoginServlet"))){
-            this.context.log("Unauthorized access request");
-            res.sendRedirect("login.html");
-        }else{
-            // pass the request along the filter chain
-            chain.doFilter(request, response);
-        }*/
-
 
     }
 
