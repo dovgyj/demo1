@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.softserve.ita.demo1.entities.Auntification;
 import com.softserve.ita.demo1.services.AuntificationService;
 import com.softserve.ita.demo1.services.AuntificationServiceImpl;
+import com.softserve.ita.demo1.util.Validator;
 import com.softserve.ita.demo1.util.security.AuthManager;
 import com.softserve.ita.demo1.util.security.RememberMeCookie;
 import com.softserve.ita.demo1.util.security.SecurityManager;
@@ -30,7 +31,15 @@ public class LoginController extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        //validation
+        Validator validator = new Validator();
+
+        if(validator.isValidEmail(email)){
+            throw new IllegalArgumentException("Email is not valid");
+        }
+
+        if(validator.hasMinLength(6,password)){
+            throw new IllegalArgumentException("Password must contain at least 6 characters");
+        }
 
         AuthManager authManager = (AuthManager) req.getAttribute("Auth");
 
