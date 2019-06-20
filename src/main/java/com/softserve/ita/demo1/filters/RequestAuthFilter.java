@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class RequestAuthFilter implements Filter{
+public class RequestAuthFilter implements Filter {
 
     private ServletContext context;
 
@@ -25,20 +25,20 @@ public class RequestAuthFilter implements Filter{
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-       // String uri = req.getRequestURI();
+        // String uri = req.getRequestURI();
         //this.context.log("Requested Resource::"+uri);
 
         HttpSession session = req.getSession(true);
 
         AuthManager authManager = new AuthManager(session);
 
-        if(authManager.guest()){
+        if (authManager.guest()) {
             Gson gson = new Gson();
             Cookie[] reqCookies = req.getCookies();
             if (reqCookies != null) {
                 for (Cookie cookie : reqCookies) {
                     if (cookie.getName().equals("remember-me")) {
-                        RememberMeCookie rememberMeCookie = gson.fromJson(cookie.getValue(),RememberMeCookie.class);
+                        RememberMeCookie rememberMeCookie = gson.fromJson(cookie.getValue(), RememberMeCookie.class);
                         authManager.tryLoginByCookie(rememberMeCookie);
                     }
                 }

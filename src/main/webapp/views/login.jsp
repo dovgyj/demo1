@@ -25,8 +25,8 @@
             <input value="123456" type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
         </div>
         <div class="custom-control custom-checkbox">
+            <input name="check_me_out" value="check_me_out" type="checkbox" class="custom-control-input" id="customCheck1">
             <label class="custom-control-label mt-1" for="customCheck1">Check me out</label>
-            <input name="chek_me_out" value="chek_me_out" type="checkbox" class="custom-control-input" id="customCheck1">
         </div>
         <button type="submit" class="btn btn-outline-primary mt-3">Submit</button>
     </form>

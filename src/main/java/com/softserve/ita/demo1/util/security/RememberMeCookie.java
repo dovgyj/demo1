@@ -1,8 +1,8 @@
 package com.softserve.ita.demo1.util.security;
 
 public class RememberMeCookie {
-    private String selector;
-    private String validator;
+    public String selector;
+    public String validator;
 
     public RememberMeCookie(String selector, String validator) {
         this.selector = selector;

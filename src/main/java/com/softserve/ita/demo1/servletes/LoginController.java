@@ -36,11 +36,6 @@ public class LoginController extends HttpServlet {
         SecurityManager securityManager = new SecurityManager();
 
         if(authManager.tryLogin(password, email)){
-            if(authManager.getUser().isAdmin()){
-                resp.sendRedirect("/admin/dashboard");
-            }else{
-                resp.sendRedirect("/home");
-            }
 
             AuntificationService auntificationService = new AuntificationServiceImpl();
             Gson gson = new Gson();
@@ -63,7 +58,7 @@ public class LoginController extends HttpServlet {
                 RememberMeCookie rememberMeCookie = new RememberMeCookie(selector,hasedValidator);
 
                 Auntification auntification = new Auntification();
-                auntification.setId(authManager.getUser().getId());
+                auntification.setUserId(authManager.getUser().getId());
                 auntification.setSelector(selector);
                 auntification.setValidator(validator);
 
@@ -72,14 +67,23 @@ public class LoginController extends HttpServlet {
                 Cookie cookie = new Cookie("remember-me", gson.toJson(rememberMeCookie));
 
                 cookie.setPath("/");
+                cookie.setDomain("localhost");
                 cookie.setMaxAge(60 * 60 * 24 * 30);
                 resp.addCookie(cookie);
             } else {
                 Cookie cookie = new Cookie("remember-me", "");
+                cookie.setDomain("localhost");
                 cookie.setPath("/");
                 cookie.setMaxAge(0);
                 resp.addCookie(cookie);
             }
+
+            if(authManager.getUser().isAdmin()){
+                resp.sendRedirect("/admin/dashboard");
+            }else{
+                resp.sendRedirect("/home");
+            }
+
         }else{
             req.setAttribute("error","Email or password does not match!");
             req.getRequestDispatcher("/views/login.jsp").forward(req,resp);

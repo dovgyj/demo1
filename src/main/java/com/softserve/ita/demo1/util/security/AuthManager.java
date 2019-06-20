@@ -1,5 +1,6 @@
 package com.softserve.ita.demo1.util.security;
 
+import com.google.gson.Gson;
 import com.softserve.ita.demo1.entities.Auntification;
 import com.softserve.ita.demo1.entities.User;
 import com.softserve.ita.demo1.services.AuntificationService;
@@ -7,6 +8,9 @@ import com.softserve.ita.demo1.services.AuntificationServiceImpl;
 import com.softserve.ita.demo1.services.UserService;
 import com.softserve.ita.demo1.services.UserServiceImpl;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class AuthManager {
@@ -16,12 +20,19 @@ public class AuthManager {
 
     private User user;
     private HttpSession session;
+    private HttpServletRequest httpServletRequest;
+    private HttpServletResponse httpServletResponse;
+    private Gson gson;
 
-    public AuthManager(HttpSession session) {
+    public AuthManager(HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+        this.session = session;
+        this.httpServletRequest = request;
+        this.httpServletResponse = response;
+
         this.securityManager = new SecurityManager();
         this.userService = new UserServiceImpl();
         this.auntificationService = new AuntificationServiceImpl();
-        this.session = session;
+        this.gson = new Gson();
 
         Object user = this.session.getAttribute("auntificatedUser");
 
@@ -80,6 +91,49 @@ public class AuthManager {
                 }
             }
         }
+    }
+
+    public void deleteCookieFromDatabase(){
+        Gson gson = new Gson();
+        Cookie[] reqCookies = this.httpServletRequest.getCookies();
+        if (reqCookies != null) {
+            for (Cookie cookie : reqCookies) {
+                if (cookie.getName().equals("remember-me")) {
+                    RememberMeCookie rememberMeCookie = gson.fromJson(cookie.getValue(),RememberMeCookie.class);
+                    this.auntificationService.delete(rememberMeCookie.getSelector());
+                }
+            }
+        }
+    }
+
+    public void setRememberMeCookie(){
+        String selector = securityManager.generateSelector();
+        String validator = securityManager.generateRememberMeToken();
+        String hasedValidator = securityManager.hashRememberMeToken(validator);
+
+        RememberMeCookie rememberMeCookie = new RememberMeCookie(selector,hasedValidator);
+
+        Auntification auntification = new Auntification();
+        auntification.setUserId(this.getUser().getId());
+        auntification.setSelector(selector);
+        auntification.setValidator(validator);
+
+        auntificationService.add(auntification);
+
+        Cookie cookie = new Cookie("remember-me", this.gson.toJson(rememberMeCookie));
+
+        cookie.setPath("/");
+        cookie.setDomain("localhost");
+        cookie.setMaxAge(60 * 60 * 24 * 30);
+        this.httpServletResponse.addCookie(cookie);
+    }
+
+    public void deleteCookieFromClient(){
+        Cookie cookie = new Cookie("remember-me", "");
+        cookie.setDomain("localhost");
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        this.httpServletResponse.addCookie(cookie);
     }
 
 }
