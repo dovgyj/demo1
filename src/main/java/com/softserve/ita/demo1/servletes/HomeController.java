@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name="Index")
+@WebServlet(name="Index",urlPatterns = "")
 public class HomeController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

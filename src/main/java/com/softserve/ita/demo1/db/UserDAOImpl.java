@@ -78,7 +78,7 @@ public class UserDAOImpl implements UserDAO {
             statement.setString(1,email);
             ResultSet resultSet = statement.executeQuery();
 
-            if(resultSet.first() != false){
+            if(resultSet.first()){
                 User user = new User();
                 user.setId(resultSet.getInt(1));
                 user.setName(resultSet.getNString(2));
@@ -87,8 +87,6 @@ public class UserDAOImpl implements UserDAO {
                 user.setPassword(resultSet.getNString(5));
 
                 return user;
-            }else{
-                return null;
             }
 
 

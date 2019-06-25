@@ -59,7 +59,7 @@ public class RegisterController extends HttpServlet {
         AuthManager authManager = (AuthManager) req.getAttribute("Auth");
         authManager.login(user);
 
-        resp.sendRedirect("/home");
+        resp.sendRedirect("/");
 
     }
 }

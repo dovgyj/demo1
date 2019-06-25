@@ -37,6 +37,8 @@ public class LoginController extends HttpServlet {
             throw new IllegalArgumentException("Email is not valid");
         }
 
+        resp.setStatus(500,"Email is not valid");
+
         if(!validator.hasMinLength(6,password)){
             throw new IllegalArgumentException("Password must contain at least 6 characters " + password);
         }
@@ -57,7 +59,7 @@ public class LoginController extends HttpServlet {
             if(authManager.getUser().isAdmin()){
                 resp.sendRedirect("/admin/dashboard");
             }else{
-                resp.sendRedirect("/home");
+                resp.sendRedirect("/");
             }
 
         }else{
