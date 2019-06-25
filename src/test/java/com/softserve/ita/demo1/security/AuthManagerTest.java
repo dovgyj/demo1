@@ -1,15 +1,15 @@
 package com.softserve.ita.demo1.security;
 
+import com.google.gson.Gson;
 import com.softserve.ita.demo1.entities.User;
+import com.softserve.ita.demo1.services.AuntificationService;
 import com.softserve.ita.demo1.services.UserService;
 import com.softserve.ita.demo1.services.UserServiceImpl;
 import com.softserve.ita.demo1.util.security.AuthManager;
 import com.softserve.ita.demo1.util.security.SecurityManager;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -17,72 +17,113 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import static org.mockito.Matchers.eq;
 
 public class AuthManagerTest {
 
-    private AuthManager authManagerMock;
-    private User testUser;
+    private AuthManager authManagerSpy;
 
-    private HttpServletResponse httpServletResponseMock;
-    private HttpServletRequest httpServletRequestMock;
+    @Mock
+    private SecurityManager securityManagerMock;
+
+    @Mock
+    private UserService userServiceMock;
+
+    @Mock
+    private AuntificationService auntificationServiceMock;
+
+    @Mock
     private HttpSession sessionMock;
 
-    @BeforeTest
-    public void setUp(){
+    @Mock
+    private HttpServletRequest httpServletRequestMock;
+
+    @Mock
+    private HttpServletResponse httpServletResponseMock;
+
+    private User testUser = new User();
+
+    @BeforeMethod
+    public void setUp() {
+
         MockitoAnnotations.initMocks(this);
 
-        testUser = new User();
-        testUser.setName("test testUser");
+        testUser.setId(1);
+        testUser.setName("Test user");
         testUser.setEmail("test@gmail.com");
-        testUser.setPassword("passwordHash");
-        testUser.setId(23);
+        testUser.setPassword("pswHash");
 
-        sessionMock = Mockito.mock(HttpSession.class);
         Mockito.when(sessionMock.getAttribute("auntificatedUser")).thenReturn(testUser);
 
-        httpServletRequestMock = Mockito.mock(HttpServletRequest.class);
-        httpServletResponseMock = Mockito.mock(HttpServletResponse.class);
-        authManagerMock = Mockito.spy(new AuthManager(sessionMock,httpServletResponseMock,httpServletRequestMock));
+        authManagerSpy = Mockito.spy(new AuthManager(sessionMock, httpServletResponseMock, httpServletRequestMock));
+        authManagerSpy.setUserService(userServiceMock);
+        authManagerSpy.setAuntificationService(auntificationServiceMock);
+        authManagerSpy.setSecurityManager(securityManagerMock);
 
     }
-    @Test
-    public void testGuest() {
-        Assert.assertFalse(authManagerMock.guest());
-    }
 
-    @Test
-    public void testGetUser(){
-        Assert.assertEquals(authManagerMock.getUser(), testUser);
-    }
-
-    @Test(expectedExceptions = {IllegalArgumentException.class})
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testLoginWithNull(){
-        authManagerMock.login(null);
+        authManagerSpy.login(null);
     }
-
-
-    public void testLoginWithValidUser(){
-        ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
-        Mockito.doNothing().when(sessionMock).setAttribute(eq("auntificatedUser"),userArgumentCaptor.capture());
-        authManagerMock.login(testUser);
-        Assert.assertEquals(testUser,userArgumentCaptor.getValue());
-    }
-
-    @InjectMocks
-    UserService userService = new UserServiceImpl();
-
-    @InjectMocks
-    SecurityManager securityManager = new SecurityManager();
 
     @Test
-    public void testTryLogin(){
-        Mockito.when(userService.getByEmail("test@gmail.com")).thenReturn(testUser);
-        Mockito.when(securityManager.checkPass("testpassword", "passwordHash")).thenReturn(true);
-        Mockito.doNothing().when(authManagerMock).login(testUser);
-        Boolean resault = authManagerMock.tryLogin("testpassword", "test@gmail.com");
-
-        Assert.assertTrue(resault);
-
+    public void testLoginWithValidUser(){
+        authManagerSpy.login(testUser);
+        Mockito.verify(sessionMock).setAttribute("auntificatedUser",testUser);
     }
+
+    @Test
+    public void testGuestReturnFalse(){
+        boolean guest = authManagerSpy.guest();
+        Assert.assertFalse(guest);
+    }
+
+    @Test
+    public void testGuestReturnTrue(){
+        try{
+            Method setUserMethod = AuthManager.class.getDeclaredMethod("setUser", User.class);
+            setUserMethod.setAccessible(true);
+            setUserMethod.invoke(authManagerSpy, new Object[]{null});
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e){
+            System.out.println(e);
+        }
+        boolean guest = authManagerSpy.guest();
+        Assert.assertTrue(guest);
+    }
+
+    @Test
+    public void testLogout(){
+        Mockito.doNothing().when(authManagerSpy).deleteCookieFromClient();
+        Mockito.doNothing().when(authManagerSpy).deleteCookieFromDatabase();
+
+        authManagerSpy.logout();
+        Mockito.verify(sessionMock).removeAttribute("auntificatedUser");
+    }
+
+    @Test
+    public void testTryLoginWithSuccess(){
+
+        Mockito.doReturn(testUser).when(userServiceMock).getByEmail("test@gmail.com");
+        Mockito.doReturn(true).when(securityManagerMock).checkPass("plainPassword","pswHash");
+        Mockito.doNothing().when(authManagerSpy).login(testUser);
+
+        boolean success = authManagerSpy.tryLogin("plainPassword", "test@gmail.com");
+
+        Assert.assertTrue(success);
+    }
+
+    @Test
+    public void testTryLoginWithFail(){
+        Mockito.doReturn(null).when(userServiceMock).getByEmail("test@gmail.com");
+
+        boolean success = authManagerSpy.tryLogin("plainPassword", "test@gmail.com");
+
+        Assert.assertFalse(success);
+    }
+
+
 }

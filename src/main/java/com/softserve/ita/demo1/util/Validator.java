@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public class Validator {
 
     public boolean isValidEmail(String email){
-        String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$";
+        String emailRegex = ".+@.+";
 
         Pattern pat = Pattern.compile(emailRegex);
         if (email == null)

@@ -33,12 +33,12 @@ public class LoginController extends HttpServlet {
 
         Validator validator = new Validator();
 
-        if(validator.isValidEmail(email)){
+        if(!validator.isValidEmail(email)){
             throw new IllegalArgumentException("Email is not valid");
         }
 
-        if(validator.hasMinLength(6,password)){
-            throw new IllegalArgumentException("Password must contain at least 6 characters");
+        if(!validator.hasMinLength(6,password)){
+            throw new IllegalArgumentException("Password must contain at least 6 characters " + password);
         }
 
         AuthManager authManager = (AuthManager) req.getAttribute("Auth");

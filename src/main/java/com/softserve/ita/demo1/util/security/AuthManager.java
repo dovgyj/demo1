@@ -37,7 +37,7 @@ public class AuthManager {
         Object user = this.session.getAttribute("auntificatedUser");
 
         if (user != null) {
-            this.user = (User) user;
+            this.setUser((User) user);
         }
 
     }
@@ -57,12 +57,12 @@ public class AuthManager {
         if (user == null) {
             throw new IllegalArgumentException("User cannot be null");
         }
-        this.user = user;
+        this.setUser(user);
         this.session.setAttribute("auntificatedUser", user);
     }
 
     public void logout() {
-        this.user = null;
+        this.setUser(null);
         this.session.removeAttribute("auntificatedUser");
         this.deleteCookieFromDatabase();
         this.deleteCookieFromClient();
@@ -70,6 +70,10 @@ public class AuthManager {
 
     public User getUser() {
         return user;
+    }
+
+    private void setUser(User user){
+        this.user = user;
     }
 
     public boolean guest() {
@@ -134,6 +138,34 @@ public class AuthManager {
         cookie.setPath("/");
         cookie.setMaxAge(0);
         this.httpServletResponse.addCookie(cookie);
+    }
+
+    public void setSecurityManager(SecurityManager securityManager) {
+        this.securityManager = securityManager;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public void setAuntificationService(AuntificationService auntificationService) {
+        this.auntificationService = auntificationService;
+    }
+
+    public void setSession(HttpSession session) {
+        this.session = session;
+    }
+
+    public void setHttpServletRequest(HttpServletRequest httpServletRequest) {
+        this.httpServletRequest = httpServletRequest;
+    }
+
+    public void setHttpServletResponse(HttpServletResponse httpServletResponse) {
+        this.httpServletResponse = httpServletResponse;
+    }
+
+    public void setGson(Gson gson) {
+        this.gson = gson;
     }
 
 }
