@@ -22,7 +22,7 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
-        String alias = name.replaceAll("[\\s]+","-") + "-" + id;
+        String alias = name.replaceAll("[\\s]+","-");
         setAlias(alias);
     }
 

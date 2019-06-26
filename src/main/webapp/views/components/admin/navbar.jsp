@@ -11,7 +11,7 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/home">Items <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/about">Categories</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/category/index">Categories</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/about">Users</a>

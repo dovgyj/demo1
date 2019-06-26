@@ -26,7 +26,7 @@ public class SecurityManager {
     private String generateRandomString(int n){
         // chose a Character random from this String
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                + "0123456789"
+               // + "0123456789"
                 + "abcdefghijklmnopqrstuvxyz";
 
         // create StringBuffer size of AlphaNumericString
