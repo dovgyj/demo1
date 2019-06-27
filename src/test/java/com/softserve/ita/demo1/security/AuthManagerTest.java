@@ -1,16 +1,13 @@
 package com.softserve.ita.demo1.security;
 
-import com.google.gson.Gson;
 import com.softserve.ita.demo1.entities.User;
-import com.softserve.ita.demo1.services.AuntificationService;
-import com.softserve.ita.demo1.services.UserService;
-import com.softserve.ita.demo1.services.UserServiceImpl;
+import com.softserve.ita.demo1.services.interfaces.AuntificationService;
+import com.softserve.ita.demo1.services.interfaces.UserService;
 import com.softserve.ita.demo1.util.security.AuthManager;
 import com.softserve.ita.demo1.util.security.SecurityManager;
 import org.mockito.*;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import javax.servlet.http.HttpServletRequest;

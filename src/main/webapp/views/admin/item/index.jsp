@@ -18,18 +18,40 @@
 <body>
 <jsp:include page="../../components/admin/navbar.jsp"/>
 <div class="container">
-    <h1 class="text-center mt-4">Update category</h1>
-    <form class="login-form" method="post" action="${pageContext.request.contextPath}/admin/category/update">
-        <input type="hidden" name="id" value="<c:out value="${category.id}"></c:out>">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Category name</label>
-            <input value="<c:out value="${category.name}"></c:out>" type="text" name="name" class="form-control"
-                   id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter catory name" required
-                   minlength="3" maxlength="60">
-        </div>
-        <button type="submit" class="btn btn-outline-primary mt-3">update</button>
-    </form>
+    <h1 class="text-center mt-4">Items</h1>
+    <a href="${pageContext.request.contextPath}/admin/category/create" class="btn btn-outline-success">add new item</a>
+    <table class="table table-bordered mt-3">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Img</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${items}"  var="item">
+            <tr>
+                <td><c:out value="${item.id}"></c:out></td>
+                <td><c:out value="${item.category.name}"></c:out></td>
+                <td><c:out value="${item.title}"></c:out></td>
+                <td><c:out value="${item.description}"></c:out></td>
+                <td><c:out value="${item.price}"></c:out></td>
+                <td><c:out value="${item.img}"></c:out></td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/admin/category/update/<c:out value="${item.id}"></c:out>" class="btn btn-outline-primary btn-sm mr-3">edit</a>
+                    <a href="${pageContext.request.contextPath}/admin/category/delete/<c:out value="${item.id}"></c:out>" class="btn btn-outline-danger btn-sm">delete</a>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
+
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

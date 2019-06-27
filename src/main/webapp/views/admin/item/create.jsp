@@ -18,18 +18,22 @@
 <body>
 <jsp:include page="../../components/admin/navbar.jsp"/>
 <div class="container">
-    <h1 class="text-center mt-4">Update category</h1>
-    <form class="login-form" method="post" action="${pageContext.request.contextPath}/admin/category/update">
-        <input type="hidden" name="id" value="<c:out value="${category.id}"></c:out>">
+    <h1 class="text-center mt-4">Create item</h1>
+    <form class="login-form" method="post" action="${pageContext.request.contextPath}/admin/item/create">
         <div class="form-group">
-            <label for="exampleInputEmail1">Category name</label>
-            <input value="<c:out value="${category.name}"></c:out>" type="text" name="name" class="form-control"
-                   id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter catory name" required
-                   minlength="3" maxlength="60">
+            <label for="exampleInputEmail1">Title</label>
+            <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="Enter title" required minlength="3" maxlength="60">
         </div>
-        <button type="submit" class="btn btn-outline-primary mt-3">update</button>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Price</label>
+            <input type="number" name="price" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="Enter title" required minlength="3" maxlength="60">
+        </div>
+        <button type="submit" class="btn btn-outline-primary mt-3">create</button>
     </form>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

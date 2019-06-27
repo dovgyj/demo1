@@ -3,10 +3,10 @@ package com.softserve.ita.demo1.util.security;
 import com.google.gson.Gson;
 import com.softserve.ita.demo1.entities.Auntification;
 import com.softserve.ita.demo1.entities.User;
-import com.softserve.ita.demo1.services.AuntificationService;
-import com.softserve.ita.demo1.services.AuntificationServiceImpl;
-import com.softserve.ita.demo1.services.UserService;
-import com.softserve.ita.demo1.services.UserServiceImpl;
+import com.softserve.ita.demo1.services.interfaces.AuntificationService;
+import com.softserve.ita.demo1.services.impl.AuntificationServiceImpl;
+import com.softserve.ita.demo1.services.interfaces.UserService;
+import com.softserve.ita.demo1.services.impl.UserServiceImpl;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

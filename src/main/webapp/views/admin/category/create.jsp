@@ -18,7 +18,7 @@
 <body>
 <jsp:include page="../../components/admin/navbar.jsp"/>
 <div class="container">
-    <h1>Create category</h1>
+    <h1 class="text-center mt-4">Create category</h1>
     <form class="login-form" method="post" action="${pageContext.request.contextPath}/admin/category/create">
         <div class="form-group">
             <label for="exampleInputEmail1">Category name</label>

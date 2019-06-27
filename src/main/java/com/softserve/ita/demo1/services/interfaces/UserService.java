@@ -1,4 +1,4 @@
-package com.softserve.ita.demo1.services;
+package com.softserve.ita.demo1.services.interfaces;
 
 import com.softserve.ita.demo1.entities.User;
 

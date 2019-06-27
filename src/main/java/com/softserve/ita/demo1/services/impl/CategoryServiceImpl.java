@@ -1,8 +1,9 @@
-package com.softserve.ita.demo1.services;
+package com.softserve.ita.demo1.services.impl;
 
-import com.softserve.ita.demo1.db.CategoryDAO;
-import com.softserve.ita.demo1.db.CategoryDAOImpl;
+import com.softserve.ita.demo1.DAO.interfaces.CategoryDAO;
+import com.softserve.ita.demo1.DAO.impl.CategoryDAOImpl;
 import com.softserve.ita.demo1.entities.Category;
+import com.softserve.ita.demo1.services.interfaces.CategoryService;
 
 import java.util.List;
 

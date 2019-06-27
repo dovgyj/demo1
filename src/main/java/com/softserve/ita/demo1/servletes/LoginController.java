@@ -1,17 +1,10 @@
 package com.softserve.ita.demo1.servletes;
 
-import com.google.gson.Gson;
-import com.softserve.ita.demo1.entities.Auntification;
-import com.softserve.ita.demo1.services.AuntificationService;
-import com.softserve.ita.demo1.services.AuntificationServiceImpl;
 import com.softserve.ita.demo1.util.Validator;
 import com.softserve.ita.demo1.util.security.AuthManager;
-import com.softserve.ita.demo1.util.security.RememberMeCookie;
-import com.softserve.ita.demo1.util.security.SecurityManager;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -1,8 +1,12 @@
 package com.softserve.ita.demo1.entities;
 
+import com.softserve.ita.demo1.services.interfaces.CategoryService;
+import com.softserve.ita.demo1.services.impl.CategoryServiceImpl;
+
 import java.util.Objects;
 
 public class Item {
+
 
     private int id;
     private String title;
@@ -10,16 +14,32 @@ public class Item {
     private String alias;
     private int categoriesId;
     private String createdAt;
-
-    public Item(String title, String description, int categoriesId, String createdAt) {
-        this.title = title;
-        this.description = description;
-        this.categoriesId = categoriesId;
-        this.createdAt = createdAt;
-    }
+    private Integer price;
+    private String img;
 
     public Item(){
 
+    }
+
+    public Category getCategory(){
+        CategoryService categoryService = new CategoryServiceImpl();
+        return categoryService.getById(categoriesId);
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     public int getId() {

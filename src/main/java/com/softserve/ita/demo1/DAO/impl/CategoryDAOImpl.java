@@ -1,4 +1,4 @@
-package com.softserve.ita.demo1.db;
+package com.softserve.ita.demo1.DAO.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.softserve.ita.demo1.DAO.interfaces.CategoryDAO;
+import com.softserve.ita.demo1.db.MySQLConnection;
 import com.softserve.ita.demo1.entities.Category;
 import org.apache.log4j.Logger;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class CategoryDAOImpl implements CategoryDAO {
 
@@ -17,16 +18,16 @@ public class CategoryDAOImpl implements CategoryDAO {
     private Connection connection = MySQLConnection.getConnection();
 
     @Override
-    public Category getById(Integer id){
+    public Category getById(Integer id) {
         String query = "SELECT `name`,`alias`,`id` FROM `categories` "
                 + "WHERE `categories`.`id` = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1,id);
+            statement.setInt(1, id);
             ResultSet categoryData = statement.executeQuery();
 
-            if(categoryData.first()){
+            if (categoryData.first()) {
                 Category category = new Category();
 
                 category.setId(categoryData.getInt(3));
@@ -37,7 +38,7 @@ public class CategoryDAOImpl implements CategoryDAO {
             }
 
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Cannot execute getById category dao.");
             LOGGER.error("Cannot execute getById category dao.");
 
@@ -47,16 +48,16 @@ public class CategoryDAOImpl implements CategoryDAO {
     }
 
     @Override
-    public Category getByAlias(String alias){
+    public Category getByAlias(String alias) {
         String query = "SELECT categories.name,categories.alias,categories.id FROM categories "
                 + "WHERE alias = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1,alias);
+            statement.setString(1, alias);
             ResultSet categoryData = statement.executeQuery();
 
-            if(categoryData.first()) {
+            if (categoryData.first()) {
 
                 Category category = new Category();
 
@@ -67,7 +68,7 @@ public class CategoryDAOImpl implements CategoryDAO {
                 return category;
             }
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Cannot execute `getByAliasAll category dao.");
             LOGGER.error("Cannot execute `getByAliasAll category dao.");
 
@@ -106,11 +107,11 @@ public class CategoryDAOImpl implements CategoryDAO {
             System.err.println("Cannot execute 'getAll' category dao.");
             LOGGER.error("Cannot execute 'getAll' category dao.", e);
 
-        }finally {
-            if(statement != null){
+        } finally {
+            if (statement != null) {
                 try {
                     statement.close();
-                }catch (SQLException e){
+                } catch (SQLException e) {
 
                 }
             }
@@ -126,11 +127,11 @@ public class CategoryDAOImpl implements CategoryDAO {
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1,category.getName());
-            statement.setString(2,category.getAlias());
+            statement.setString(1, category.getName());
+            statement.setString(2, category.getAlias());
             statement.execute();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Cannot execute add in CategoryDAO");
             LOGGER.error("Cannot execute add in CategoryDAO");
         }
@@ -138,16 +139,19 @@ public class CategoryDAOImpl implements CategoryDAO {
 
     @Override
     public void update(Category category) {
-        String query = "DELETE FROM categories WHERE categories.id = ?";
+        String query = "UPDATE categories SET categories.name = ?, categories.alias = ? "
+                + " WHERE categories.id = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1,id);
+            statement.setInt(3, category.getId());
+            statement.setString(1, category.getName());
+            statement.setString(2, category.getAlias());
             statement.execute();
 
-        }catch (SQLException e){
-            System.out.println("Cannot execute delete in UserDAO");
-            LOGGER.error("Cannot execute delete in UserDAO");
+        } catch (SQLException e) {
+            System.out.println("Cannot execute update in CategoryDAO");
+            LOGGER.error("Cannot execute update in CategoryDAO");
         }
     }
 
@@ -157,10 +161,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1,id);
+            statement.setInt(1, id);
             statement.execute();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Cannot execute delete in UserDAO");
             LOGGER.error("Cannot execute delete in UserDAO");
         }

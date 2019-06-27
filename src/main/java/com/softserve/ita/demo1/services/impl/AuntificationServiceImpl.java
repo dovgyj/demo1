@@ -1,8 +1,9 @@
-package com.softserve.ita.demo1.services;
+package com.softserve.ita.demo1.services.impl;
 
-import com.softserve.ita.demo1.db.AuntificationDAO;
-import com.softserve.ita.demo1.db.AuntificationDAOImpl;
+import com.softserve.ita.demo1.DAO.interfaces.AuntificationDAO;
+import com.softserve.ita.demo1.DAO.impl.AuntificationDAOImpl;
 import com.softserve.ita.demo1.entities.Auntification;
+import com.softserve.ita.demo1.services.interfaces.AuntificationService;
 
 public class AuntificationServiceImpl implements AuntificationService {
 

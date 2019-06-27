@@ -1,5 +1,7 @@
 package com.softserve.ita.demo1.db;
 
+import com.softserve.ita.demo1.DAO.impl.UserDAOImpl;
+import com.softserve.ita.demo1.DAO.interfaces.UserDAO;
 import com.softserve.ita.demo1.entities.User;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;

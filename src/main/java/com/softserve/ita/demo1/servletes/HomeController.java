@@ -1,8 +1,8 @@
 package com.softserve.ita.demo1.servletes;
 
 import com.softserve.ita.demo1.entities.Category;
-import com.softserve.ita.demo1.services.CategoryService;
-import com.softserve.ita.demo1.services.CategoryServiceImpl;
+import com.softserve.ita.demo1.services.interfaces.CategoryService;
+import com.softserve.ita.demo1.services.impl.CategoryServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

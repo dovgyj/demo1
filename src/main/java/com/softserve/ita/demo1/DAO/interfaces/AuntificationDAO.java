@@ -1,4 +1,4 @@
-package com.softserve.ita.demo1.db;
+package com.softserve.ita.demo1.DAO.interfaces;
 
 import com.softserve.ita.demo1.entities.Auntification;
 

@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import com.softserve.ita.demo1.services.UserService;
-import com.softserve.ita.demo1.services.UserServiceImpl;
+import com.softserve.ita.demo1.services.interfaces.UserService;
+import com.softserve.ita.demo1.services.impl.UserServiceImpl;
 import com.softserve.ita.demo1.util.Validator;
 import com.softserve.ita.demo1.util.security.AuthManager;
 import com.softserve.ita.demo1.util.security.SecurityManager;

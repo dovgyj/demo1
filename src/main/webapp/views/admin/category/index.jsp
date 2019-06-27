@@ -18,10 +18,10 @@
 <body>
 <jsp:include page="../../components/admin/navbar.jsp"/>
 <div class="container">
-    <h1>Categories</h1>
-    <a href="${pageContext.request.contextPath}/admin/category/create" class="btn btn-success">add new category</a>
-    <table class="table">
-        <thead>
+    <h1 class="text-center mt-4">Categories</h1>
+    <a href="${pageContext.request.contextPath}/admin/category/create" class="btn btn-outline-success">add new category</a>
+    <table class="table table-bordered mt-3">
+        <thead class="thead-dark">
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -34,8 +34,8 @@
                 <td><c:out value="${category.id}"></c:out></td>
                 <td><c:out value="${category.name}"></c:out></td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/admin/category/update/<c:out value="${category.id}"></c:out>" class="btn btn-primary btn-sm">edit</a>
-                    <a href="${pageContext.request.contextPath}/admin/category/delete/<c:out value="${category.id}"></c:out>" class="btn btn-danger btn-sm">delete</a>
+                    <a href="${pageContext.request.contextPath}/admin/category/update/<c:out value="${category.id}"></c:out>" class="btn btn-outline-primary btn-sm mr-3">edit</a>
+                    <a href="${pageContext.request.contextPath}/admin/category/delete/<c:out value="${category.id}"></c:out>" class="btn btn-outline-danger btn-sm">delete</a>
                 </td>
             </tr>
         </c:forEach>

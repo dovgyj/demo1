@@ -1,7 +1,9 @@
-package com.softserve.ita.demo1.db;
+package com.softserve.ita.demo1.DAO.impl;
 
+import com.softserve.ita.demo1.DAO.impl.CategoryDAOImpl;
+import com.softserve.ita.demo1.DAO.interfaces.UserDAO;
+import com.softserve.ita.demo1.db.MySQLConnection;
 import com.softserve.ita.demo1.entities.User;
-import com.softserve.ita.demo1.enums.UserRole;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
