@@ -18,32 +18,29 @@
 <body>
 <jsp:include page="../../components/admin/navbar.jsp"/>
 <div class="container">
-    <h1 class="text-center mt-4">Items</h1>
-    <a href="${pageContext.request.contextPath}/admin/item/create" class="btn btn-outline-success">add new item</a>
+    <h1 class="text-center mt-4">Users</h1>
     <table class="table table-bordered mt-3">
         <thead class="thead-dark">
         <tr>
             <th>ID</th>
-            <th>Category</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Img</th>
-            <th>Edit</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Block</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${items}"  var="item">
+        <c:forEach items="${users}"  var="user">
             <tr>
-                <td><c:out value="${item.id}"></c:out></td>
-                <td><c:out value="${item.category.name}"></c:out></td>
-                <td><c:out value="${item.title}"></c:out></td>
-                <td><c:out value="${item.description}"></c:out></td>
-                <td><c:out value="${item.price}"></c:out></td>
-                <td><c:out value="${item.img}"></c:out></td>
+                <td><c:out value="${user.id}"></c:out></td>
+                <td><c:out value="${user.name}"></c:out></td>
+                <td><c:out value="${user.email}"></c:out></td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/admin/item/update/<c:out value="${item.id}"></c:out>" class="btn btn-outline-primary btn-sm mr-3">edit</a>
-                    <a href="${pageContext.request.contextPath}/admin/item/delete/<c:out value="${item.id}"></c:out>" class="btn btn-outline-danger btn-sm">delete</a>
+                    <c:if test="${user.blocked}">
+                        <a href="${pageContext.request.contextPath}/admin/item/delete/<c:out value="${item.id}"></c:out>" class="btn btn-outline-danger btn-sm">block</a>
+                    </c:if>
+                    <c:if test="${!user.blocked}">
+                        <a href="${pageContext.request.contextPath}/admin/item/update/<c:out value="${item.id}"></c:out>" class="btn btn-outline-primary btn-sm mr-3">unblock</a>
+                    </c:if>
                 </td>
             </tr>
         </c:forEach>

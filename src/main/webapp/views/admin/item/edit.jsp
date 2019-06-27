@@ -18,33 +18,42 @@
 <body>
 <jsp:include page="../../components/admin/navbar.jsp"/>
 <div class="container">
-    <h1 class="text-center mt-4">Create item</h1>
-    <form class="" method="post" action="${pageContext.request.contextPath}/admin/item/create">
+    <h1 class="text-center mt-4">Update item</h1>
+    <form class="" method="post" action="${pageContext.request.contextPath}/admin/item/update">
+        <input type="hidden" name="id" value="<c:out value="${item.id}"></c:out>">
         <div class="form-group">
             <label for="category">Category</label>
             <select name="categories_id" id="category" required class="form-control">
                 <c:forEach items="${categories}" var="category">
-                    <option value="<c:out value="${category.id}"></c:out>">
-                        <c:out value="${category.name}"></c:out>
-                    </option>
+                    <c:if test="${category eq item.category}">
+                        <option value="<c:out value="${category.id}"></c:out>" selected>
+                            <c:out value="${category.name}"></c:out>
+                        </option>
+                    </c:if>
+                    <c:if test="${category != item.category}">
+                        <option value="<c:out value="${category.id}"></c:out>">
+                            <c:out value="${category.name}"></c:out>
+                        </option>
+                    </c:if>
+
                 </c:forEach>
             </select>
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Title</label>
-            <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            <input value="<c:out value="${item.title}"></c:out>" type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                    placeholder="Enter title" required minlength="3" maxlength="60">
         </div>
         <div class="form-group">
             <label for="price">Price</label>
-            <input type="number" name="price" class="form-control" id="price" aria-describedby="emailHelp"
-                   placeholder="Enter price" required minlength="3" maxlength="60">
+            <input value="<c:out value="${item.price}"></c:out>" type="number" name="price" class="form-control" id="price" aria-describedby="emailHelp"
+                   placeholder="Enter title" required minlength="3" maxlength="60">
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea name="description" id="description" class="form-control" cols="30" rows="10" required></textarea>
+            <textarea name="description" id="description" class="form-control" cols="30" rows="10" required><c:out value="${item.description}"></c:out></textarea>
         </div>
-        <button type="submit" class="btn btn-outline-primary mt-3">create</button>
+        <button type="submit" class="btn btn-outline-primary mt-3">update</button>
     </form>
 </div>
 

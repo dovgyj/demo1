@@ -13,6 +13,15 @@ public class User {
     private String email;
 
     private UserRole role;
+    private Boolean isBlocked;
+
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
+    }
 
     public User(){
         this.role = UserRole.USER;

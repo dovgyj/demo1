@@ -35,13 +35,17 @@ public class ItemDAOImpl implements ItemDAO {
                 item.setDescription(rezult.getNString(2));
                 item.setAlias(rezult.getNString(3));
                 item.setPrice(rezult.getInt(4));
-                item.setCreatedAt(rezult.getNString(5));
+                item.setCreatedAt(rezult.getString(5));
                 item.setCategoriesId(rezult.getInt(6));
                 item.setImg(rezult.getNString(7));
+                item.setId(id);
+
+                return item;
             }
 
 
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println("Cannot execute getById in ItemDAO");
             LOGGER.error("Cannot execute getById in ItemDAO");
         }
@@ -51,7 +55,7 @@ public class ItemDAOImpl implements ItemDAO {
 
     @Override
     public void update(Item item) {
-        String query = "UPDATE goods SET goods.alias = ?,goods.title = ?,goods.price = ?,goods.description = ?,goods.price = ?,goods.img = ?,goods.categories_id = ?"
+        String query = "UPDATE goods SET goods.alias = ?,goods.title = ?,goods.price = ?,goods.description = ?,goods.img = ?,goods.categories_id = ?"
                 + " WHERE goods.id = ?";
 
         try {
@@ -66,6 +70,7 @@ public class ItemDAOImpl implements ItemDAO {
             statement.execute();
 
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println("Cannot execute update in ItemDAO");
             LOGGER.error("Cannot execute update in ItemDAO");
         }
@@ -74,7 +79,7 @@ public class ItemDAOImpl implements ItemDAO {
     @Override
     public void add(Item item) {
         String query = "INSERT INTO goods(title, description, alias, price, created_at, categories_id, img) VALUES"
-                + " (?,?,?,?,?,CURRENT_TIMESTAMP,?)";
+                + " (?,?,?,?,CURRENT_TIMESTAMP,?,?)";
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -82,10 +87,12 @@ public class ItemDAOImpl implements ItemDAO {
             statement.setString(2, item.getDescription());
             statement.setString(3, item.getAlias());
             statement.setInt(4, item.getPrice());
+            statement.setInt(5,item.getCategoriesId());
             statement.setString(6, item.getImg());
             statement.execute();
 
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println("Cannot execute add in ItemDAO");
             LOGGER.error("Cannot execute add in ItemDAO");
         }
@@ -108,7 +115,7 @@ public class ItemDAOImpl implements ItemDAO {
 
     @Override
     public List<Item> getAll(){
-        String query = "SELECT title,description,alias,price,created_at,categories_id,img FROM goods";
+        String query = "SELECT title,description,alias,price,created_at,categories_id,img,id FROM goods";
 
         try {
             PreparedStatement smtatement = connection.prepareStatement(query);
@@ -121,14 +128,18 @@ public class ItemDAOImpl implements ItemDAO {
                 item.setDescription(rezult.getNString(2));
                 item.setAlias(rezult.getNString(3));
                 item.setPrice(rezult.getInt(4));
-                item.setCreatedAt(rezult.getNString(5));
+                item.setCreatedAt(rezult.getString(5));
                 item.setCategoriesId(rezult.getInt(6));
                 item.setImg(rezult.getNString(7));
+                item.setId(rezult.getInt(8));
                 itemList.add(item);
             }
 
+            return itemList;
+
 
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println("Cannot execute getAll in ItemDAO");
             LOGGER.error("Cannot execute getAll in ItemDAO");
         }

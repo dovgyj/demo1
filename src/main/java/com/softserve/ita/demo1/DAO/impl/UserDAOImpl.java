@@ -10,6 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -49,6 +52,38 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void update(User user) {
 
+    }
+
+    @Override
+    public List<User> getAllUsers(){
+        String query = "SELECT name,email,role,password,users.id,NOT(ISNULL(blacklist.id)) as blocked FROM users "
+                + "LEFT JOIN blacklist ON users.id = blacklist.user_id"
+                + " WHERE role = 'USER'";
+
+        try{
+            PreparedStatement smtatement = connection.prepareStatement(query);
+            ResultSet rezult = smtatement.executeQuery();
+            List<User> userList = new ArrayList<>();
+
+            while (rezult.next()){
+                User user = new User();
+                user.setName(rezult.getNString(1));
+                user.setEmail(rezult.getNString(2));
+                user.setRole(rezult.getNString(3));
+                user.setPassword(rezult.getNString(4));
+                user.setId(rezult.getInt(5));
+                user.setBlocked(rezult.getBoolean(6));
+                userList.add(user);
+            }
+
+            return userList;
+
+        }catch (SQLException e){
+            System.out.println("Cannot execute getAllUsers in UserDAO");
+            LOGGER.error("Cannot execute getAllUsers in UserDAO");
+        }
+
+        return Collections.emptyList();
     }
 
     @Override

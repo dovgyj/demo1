@@ -18,6 +18,7 @@ public class IndexController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ItemService itemService = new ItemServiceImpl();
         List<Item> itemList = itemService.getAll();
+        System.out.println(itemList);
         req.setAttribute("items", itemList);
         req.getRequestDispatcher("/views/admin/item/index.jsp").forward(req, resp);
     }

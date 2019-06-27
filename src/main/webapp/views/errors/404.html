@@ -5,8 +5,37 @@
     <title>404</title>
 </head>
 <body>
-<h1>404</h1>
-<h3>page not found</h3>
+<div class="error">
+    <h1 class="error__code">404</h1>
+    <h3 class="error__description">page not found</h3>
+    <a href="/" class="home-link error__home-link">home</a>
+</div>
+
+<style>
+    .error{
+        margin-top: 10%;
+        text-align: center;
+    }
+
+    .error .error__description{
+        margin-top: 25px;
+    }
+
+    .home-link{
+        padding: 10px 20px;
+        border: 1px solid #8BC34A;
+        color: #8BC34A;
+        font-weight: bold;
+        text-decoration: none;
+        display: block;
+        width: fit-content;
+        margin: auto;
+    }
+
+    .error .error__home-link{
+        margin-top: 30px;
+    }
+</style>
 
 </body>
 </html>

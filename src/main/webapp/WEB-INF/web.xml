@@ -44,6 +44,10 @@
     <servlet-name>Dashboard</servlet-name>
     <servlet-class>com.softserve.ita.demo1.servletes.admin.DashBoardController</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AdminUsersIndex</servlet-name>
+    <servlet-class>com.softserve.ita.demo1.servletes.admin.user.IndexController</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>LoginOut</servlet-name>
     <url-pattern>/logout</url-pattern>
@@ -79,6 +83,13 @@
   <servlet-mapping>
     <servlet-name>Dashboard</servlet-name>
     <url-pattern>/admin/dashboard</url-pattern>
+  </servlet-mapping>
+  
+
+  
+  <servlet-mapping>
+    <servlet-name>AdminUsersIndex</servlet-name>
+    <url-pattern>/admin/users</url-pattern>
   </servlet-mapping>
 
 

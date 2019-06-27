@@ -5,6 +5,8 @@ import com.softserve.ita.demo1.DAO.impl.UserDAOImpl;
 import com.softserve.ita.demo1.entities.User;
 import com.softserve.ita.demo1.services.interfaces.UserService;
 
+import java.util.List;
+
 public class UserServiceImpl implements UserService {
 
     private UserDAO userDAO;
@@ -21,6 +23,11 @@ public class UserServiceImpl implements UserService {
         }
 
         return userDAO.getById(id);
+    }
+
+    @Override
+    public List<User> getAllUsers(){
+        return userDAO.getAllUsers();
     }
 
     @Override

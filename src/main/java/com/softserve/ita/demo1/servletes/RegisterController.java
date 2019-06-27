@@ -31,19 +31,19 @@ public class RegisterController extends HttpServlet {
 
         Validator validator = new Validator();
 
-        if(validator.hasMinLength(2,name)){
+        if(!validator.hasMinLength(2,name)){
             throw new IllegalArgumentException("Name must contain minimum 2 chars");
         }
 
-        if(validator.isValidEmail(email) ){
+        if(!validator.isValidEmail(email) ){
             throw new IllegalArgumentException("Email is not valid");
         }
 
-        if(validator.hasMinLength(6,password)){
+        if(!validator.hasMinLength(6,password)){
             throw new IllegalArgumentException("Password must contain at least 6 characters");
         }
 
-        if(password.equals(passwordConfirmation)){
+        if(!password.equals(passwordConfirmation)){
             throw new IllegalArgumentException("Password and password confirmation dont same");
         }
 

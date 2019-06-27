@@ -19,6 +19,10 @@
             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
         </form>
         <c:if test="${!Auth.guest()}">
+            <a href="${pageContext.request.contextPath}/bin" class="nav-link nav-link-shopping-basket">
+                <i class="fas fa-shopping-basket"></i>
+                <span class="badge badge-primary badge-pill shoping-basket-badge">2</span>
+            </a>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ${Auth.user.name}
