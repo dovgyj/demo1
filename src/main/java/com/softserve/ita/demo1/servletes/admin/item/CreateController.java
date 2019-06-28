@@ -1,5 +1,6 @@
 package com.softserve.ita.demo1.servletes.admin.item;
 
+import com.softserve.ita.demo1.DAO.exception.DAOException;
 import com.softserve.ita.demo1.entities.Category;
 import com.softserve.ita.demo1.entities.Item;
 import com.softserve.ita.demo1.services.impl.CategoryServiceImpl;
@@ -18,10 +19,21 @@ import java.util.List;
 @WebServlet(urlPatterns = "/admin/item/create")
 public class CreateController extends HttpServlet {
 
+    private CategoryService categoryService;
+
+    private ItemService itemService;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+
+        categoryService = new CategoryServiceImpl();
+        itemService  = new ItemServiceImpl();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CategoryService service = new CategoryServiceImpl();
-        List<Category> categories = service.getAll();
+        List<Category> categories = categoryService.getAll();
         req.setAttribute("categories", categories);
 
         req.getRequestDispatcher("/views/admin/item/create.jsp").forward(req, resp);
@@ -30,11 +42,34 @@ public class CreateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String title = req.getParameter("title");
+        if(title == null){
+            throw new ServletException("title is null");
+        }
         String description = req.getParameter("description");
-        Integer categoryId = Integer.valueOf(req.getParameter("categories_id"));
-        Integer price = Integer.valueOf(req.getParameter("price"));
+        if(description == null){
+            throw new ServletException("description is null");
+        }
 
-        ItemService itemService = new ItemServiceImpl();
+        String categoryIdString = req.getParameter("categories_id");
+        if(categoryIdString == null){
+            throw new ServletException("categories_id is null");
+        }
+
+        String priceString = req.getParameter("price");
+        if(priceString == null){
+            throw new ServletException("price is null");
+        }
+
+        Integer categoryId = null;
+        Integer price = null;
+
+        try {
+            categoryId = Integer.valueOf(categoryIdString);
+            price = Integer.valueOf(priceString);
+        } catch (NumberFormatException e){
+            throw new ServletException(e.getMessage());
+        }
+
 
         Item item = new Item();
         item.setTitle(title);
@@ -42,7 +77,11 @@ public class CreateController extends HttpServlet {
         item.setCategoriesId(categoryId);
         item.setPrice(price);
 
-        itemService.add(item);
+        try {
+            itemService.add(item);
+        } catch (DAOException | IllegalArgumentException e){
+            throw new ServletException(e.getMessage());
+        }
 
         resp.sendRedirect("/admin/item/index");
 

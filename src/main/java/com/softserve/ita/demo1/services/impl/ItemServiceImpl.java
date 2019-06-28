@@ -1,5 +1,6 @@
 package com.softserve.ita.demo1.services.impl;
 
+import com.softserve.ita.demo1.DAO.exception.DAOException;
 import com.softserve.ita.demo1.DAO.impl.ItemDAOImpl;
 import com.softserve.ita.demo1.DAO.interfaces.ItemDAO;
 import com.softserve.ita.demo1.entities.Item;
@@ -16,7 +17,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item getById(Integer id) {
+    public Item getById(Integer id) throws DAOException{
         if(id <= 0){
             throw new IllegalArgumentException("Id must be positive");
         }
@@ -24,7 +25,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void update(Item item) {
+    public void update(Item item) throws DAOException{
         if(item == null){
             throw new IllegalArgumentException("Item is null");
         }
@@ -32,15 +33,17 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void add(Item item) {
+    public void add(Item item) throws DAOException{
         if(item == null){
             throw new IllegalArgumentException("Item is null");
         }
+
         itemDAO.add(item);
+
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Integer id) throws DAOException{
         if(id <= 0){
             throw new IllegalArgumentException("Id must be positive");
         }
@@ -48,7 +51,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<Item> getAll() {
+    public List<Item> getAll() throws DAOException{
         return itemDAO.getAll();
     }
 }

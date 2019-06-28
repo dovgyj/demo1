@@ -122,4 +122,8 @@
     <error-code>404</error-code>
     <location>/views/errors/404.html</location>
   </error-page>
+  <error-page>
+    <exception-type>javax.servlet.ServletException</exception-type>
+    <location>/views/errors/500.html</location>
+  </error-page>
 </web-app>
