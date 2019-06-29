@@ -7,26 +7,26 @@ import java.util.Random;
 
 public class SecurityManager {
 
-    public String hashPassword(String plainTextPassword){
+    public String hashPassword(String plainTextPassword) {
         return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
     }
 
     public boolean checkPass(String plainPassword, String hashedPassword) {
-        return  BCrypt.checkpw(plainPassword, hashedPassword);
+        return BCrypt.checkpw(plainPassword, hashedPassword);
     }
 
-    public String generateRememberMeToken(){
+    public String generateRememberMeToken() {
         return this.generateRandomString(20);
     }
 
-    public String generateSelector(){
+    public String generateSelector() {
         return this.generateRandomString(100);
     }
 
-    private String generateRandomString(int n){
+    private String generateRandomString(int n) {
         // chose a Character random from this String
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-               // + "0123456789"
+                // + "0123456789"
                 + "abcdefghijklmnopqrstuvxyz";
 
         // create StringBuffer size of AlphaNumericString
@@ -37,7 +37,7 @@ public class SecurityManager {
             // generate a random number between
             // 0 to AlphaNumericString variable length
             int index
-                    = (int)(AlphaNumericString.length()
+                    = (int) (AlphaNumericString.length()
                     * Math.random());
 
             // add Character one by one in end of sb
@@ -48,11 +48,11 @@ public class SecurityManager {
         return sb.toString();
     }
 
-    public String hashRememberMeToken(String token){
-        return BCrypt.hashpw(token,BCrypt.gensalt());
+    public String hashRememberMeToken(String token) {
+        return BCrypt.hashpw(token, BCrypt.gensalt());
     }
 
-    public boolean checkRememberMeToken(String plainToken,String hashedToken){
-        return  BCrypt.checkpw(plainToken, hashedToken);
+    public boolean checkRememberMeToken(String plainToken, String hashedToken) {
+        return BCrypt.checkpw(plainToken, hashedToken);
     }
 }

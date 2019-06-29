@@ -1,5 +1,6 @@
 package com.softserve.ita.demo1.servletes.admin.category;
 
+import com.softserve.ita.demo1.DAO.exception.DAOException;
 import com.softserve.ita.demo1.entities.Category;
 import com.softserve.ita.demo1.services.interfaces.CategoryService;
 import com.softserve.ita.demo1.services.impl.CategoryServiceImpl;
@@ -15,23 +16,32 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/admin/category/update/*")
 public class UpdateController extends HttpServlet {
 
+    private CategoryService categoryService;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        categoryService = new CategoryServiceImpl();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CategoryService service = new CategoryServiceImpl();
         String path = req.getPathInfo();
         String id = path.split("/")[1];
         Integer categoryId = null;
 
         try {
             categoryId = Integer.valueOf(id);
-            Category category = service.getById(categoryId);
-            if(category == null){
+            Category category = categoryService.getById(categoryId);
+            if (category == null) {
                 throw new NotFound();
             }
-            req.setAttribute("category",category);
-            req.getRequestDispatcher("/views/admin/category/edit.jsp").forward(req,resp);
-        } catch (NumberFormatException | NotFound e){
+            req.setAttribute("category", category);
+            req.getRequestDispatcher("/views/admin/category/edit.jsp").forward(req, resp);
+        } catch (NumberFormatException | NotFound e) {
             resp.setStatus(404);
+        } catch (DAOException e) {
+            throw new ServletException(e.getMessage(), e);
         }
     }
 
@@ -40,13 +50,14 @@ public class UpdateController extends HttpServlet {
         String name = req.getParameter("name");
         Integer id = Integer.valueOf(req.getParameter("id"));
 
-        CategoryService service = new CategoryServiceImpl();
+        try {
+            Category category = categoryService.getById(id);
+            category.setName(name);
+            categoryService.update(category);
+            resp.sendRedirect("/admin/category/update/" + category.getId());
+        } catch (DAOException e) {
+            throw new ServletException(e.getMessage(), e);
+        }
 
-        Category category = service.getById(id);
-        category.setName(name);
-
-        service.update(category);
-
-        resp.sendRedirect("/admin/category/update/" + category.getId());
     }
 }

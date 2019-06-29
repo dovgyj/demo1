@@ -35,11 +35,11 @@
                 <td><c:out value="${user.name}"></c:out></td>
                 <td><c:out value="${user.email}"></c:out></td>
                 <td>
-                    <c:if test="${user.blocked}">
-                        <a href="${pageContext.request.contextPath}/admin/item/delete/<c:out value="${item.id}"></c:out>" class="btn btn-outline-danger btn-sm">block</a>
-                    </c:if>
                     <c:if test="${!user.blocked}">
-                        <a href="${pageContext.request.contextPath}/admin/item/update/<c:out value="${item.id}"></c:out>" class="btn btn-outline-primary btn-sm mr-3">unblock</a>
+                        <a href="${pageContext.request.contextPath}/admin/user/blacklist/add/<c:out value="${user.id}"></c:out>" class="btn btn-outline-danger btn-sm">block</a>
+                    </c:if>
+                    <c:if test="${user.blocked}">
+                        <a href="${pageContext.request.contextPath}/admin/user/blacklist/remove/<c:out value="${user.id}"></c:out>" class="btn btn-outline-primary btn-sm mr-3">unblock</a>
                     </c:if>
                 </td>
             </tr>

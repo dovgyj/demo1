@@ -1,5 +1,6 @@
 package com.softserve.ita.demo1.servletes.admin.category;
 
+import com.softserve.ita.demo1.DAO.exception.DAOException;
 import com.softserve.ita.demo1.entities.Category;
 import com.softserve.ita.demo1.services.interfaces.CategoryService;
 import com.softserve.ita.demo1.services.impl.CategoryServiceImpl;
@@ -15,11 +16,24 @@ import java.util.List;
 @WebServlet(urlPatterns = "/admin/category/index")
 public class IndexController extends HttpServlet {
 
+    private CategoryService categoryService;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        categoryService = new CategoryServiceImpl();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CategoryService service = new CategoryServiceImpl();
-        List<Category> categories = service.getAll();
-        req.setAttribute("categories", categories);
+        try {
+            List<Category> categories = categoryService.getAll();
+            req.setAttribute("categories", categories);
+            System.out.println(categories);
+        } catch (DAOException e) {
+            throw new ServletException(e.getMessage());
+        }
+
         req.getRequestDispatcher("/views/admin/category/index.jsp").forward(req, resp);
     }
 }

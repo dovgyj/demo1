@@ -1,5 +1,6 @@
 package com.softserve.ita.demo1.servletes;
 
+import com.softserve.ita.demo1.DAO.exception.DAOException;
 import com.softserve.ita.demo1.util.Validator;
 import com.softserve.ita.demo1.util.security.AuthManager;
 
@@ -13,10 +14,9 @@ import java.io.IOException;
 public class LoginController extends HttpServlet {
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/views/login.jsp");
-        rd.forward(request,response);
+        rd.forward(request, response);
     }
 
     @Override
@@ -26,40 +26,36 @@ public class LoginController extends HttpServlet {
 
         Validator validator = new Validator();
 
-        if(!validator.isValidEmail(email)){
-            throw new IllegalArgumentException("Email is not valid");
-        }
+        if (!validator.isValidEmail(email) || !validator.hasMinLength(6, password)) {
+            resp.setStatus(400);
+        } else {
+            AuthManager authManager = (AuthManager) req.getAttribute("Auth");
 
-        resp.setStatus(500,"Email is not valid");
+            try {
+                if (authManager.tryLogin(password, email)) {
 
-        if(!validator.hasMinLength(6,password)){
-            throw new IllegalArgumentException("Password must contain at least 6 characters " + password);
-        }
+                    authManager.deleteCookieFromDatabase();
 
-        AuthManager authManager = (AuthManager) req.getAttribute("Auth");
+                    if (req.getParameter("check_me_out") != null && req.getParameter("check_me_out").equals("check_me_out")) {
 
-        if(authManager.tryLogin(password, email)){
+                        authManager.setRememberMeCookie();
+                    } else {
+                        authManager.deleteCookieFromClient();
+                    }
 
-            authManager.deleteCookieFromDatabase();
+                    if (authManager.getUser().isAdmin()) {
+                        resp.sendRedirect("/admin/dashboard");
+                    } else {
+                        resp.sendRedirect("/");
+                    }
 
-            if (req.getParameter("check_me_out") != null && req.getParameter("check_me_out").equals("check_me_out")) {
-
-                authManager.setRememberMeCookie();
-            } else {
-                authManager.deleteCookieFromClient();
+                } else {
+                    req.setAttribute("error", "Email or password does not match!");
+                    req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+                }
+            } catch (DAOException e) {
+                throw new ServletException(e.getMessage());
             }
-
-            if(authManager.getUser().isAdmin()){
-                resp.sendRedirect("/admin/dashboard");
-            }else{
-                resp.sendRedirect("/");
-            }
-
-        }else{
-            req.setAttribute("error","Email or password does not match!");
-            req.getRequestDispatcher("/views/login.jsp").forward(req,resp);
         }
-
-
     }
 }

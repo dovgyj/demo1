@@ -183,7 +183,6 @@ public class ItemDAOImpl implements ItemDAO {
         } finally {
             try {
                 smtatement.close();
-                return Collections.emptyList();
             } catch (SQLException e) {
                 LOGGER.error("Cannot close statement ItemDAO");
                 throw new DAOException("Cannot execute add in ItemDAO");

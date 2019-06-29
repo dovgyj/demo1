@@ -1,5 +1,6 @@
 package com.softserve.ita.demo1.services.impl;
 
+import com.softserve.ita.demo1.DAO.exception.DAOException;
 import com.softserve.ita.demo1.DAO.interfaces.CategoryDAO;
 import com.softserve.ita.demo1.DAO.impl.CategoryDAOImpl;
 import com.softserve.ita.demo1.entities.Category;
@@ -16,67 +17,47 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category getById(Integer id) {
-        try {
-            return categoryDAO.getById(id);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Id does not exist.");
+    public Category getById(Integer id) throws DAOException {
+        if (id == null) {
+            throw new IllegalArgumentException("Id is null");
         }
+        return categoryDAO.getById(id);
     }
 
     @Override
-    public List<Category> getAll() {
+    public List<Category> getAll() throws DAOException {
         return categoryDAO.getAll();
     }
 
     @Override
-    public void add(Category category) {
-        if (category != null) {
-            try {
-                categoryDAO.add(category);
-            } catch (Exception e) {
-                throw new IllegalArgumentException("Cannot add given category. Unknown error.");
-            }
-        } else {
+    public void add(Category category) throws DAOException {
+        if (category == null) {
             throw new IllegalArgumentException("Cannot add given category. Category cannot be null.");
         }
+        categoryDAO.add(category);
     }
 
     @Override
-    public void update(Category category) {
-        if (category != null) {
-            try {
-                categoryDAO.update(category);
-            } catch (Exception e) {
-                throw new IllegalArgumentException("Cannot update given category. Unknown error.");
-            }
-        } else {
+    public void update(Category category) throws DAOException {
+        if (category == null) {
             throw new IllegalArgumentException("Cannot update given category. Category cannot be null.");
         }
+        categoryDAO.update(category);
     }
 
     @Override
-    public void delete(Integer id) {
-        if (id != null) {
-            try {
-                categoryDAO.delete(id);
-            } catch (Exception e) {
-                throw new IllegalArgumentException("Cannot delete given category. Unknown error.");
-            }
-        } else {
+    public void delete(Integer id) throws DAOException {
+        if (id == null) {
             throw new IllegalArgumentException("Cannot delete given category. Id cannot be null.");
         }
+
+        categoryDAO.delete(id);
     }
 
-    public Category getByAlias(String alias) {
-        if(alias != null){
-            try {
-                return categoryDAO.getByAlias(alias);
-            } catch (Exception e){
-                throw new IllegalArgumentException("Cannot get category by alias. Unknown error");
-            }
-        }else{
+    public Category getByAlias(String alias) throws DAOException {
+        if (alias == null) {
             throw new IllegalArgumentException("Cannot get category by alias. Alias cannot be null");
         }
+        return categoryDAO.getByAlias(alias);
     }
 }

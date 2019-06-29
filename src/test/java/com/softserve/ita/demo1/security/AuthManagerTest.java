@@ -1,5 +1,6 @@
 package com.softserve.ita.demo1.security;
 
+import com.softserve.ita.demo1.DAO.exception.DAOException;
 import com.softserve.ita.demo1.entities.User;
 import com.softserve.ita.demo1.services.interfaces.AuntificationService;
 import com.softserve.ita.demo1.services.interfaces.UserService;
@@ -93,7 +94,7 @@ public class AuthManagerTest {
     }
 
     @Test
-    public void testLogout(){
+    public void testLogout() throws DAOException {
         Mockito.doNothing().when(authManagerSpy).deleteCookieFromClient();
         Mockito.doNothing().when(authManagerSpy).deleteCookieFromDatabase();
 
@@ -102,7 +103,7 @@ public class AuthManagerTest {
     }
 
     @Test
-    public void testTryLoginWithSuccess(){
+    public void testTryLoginWithSuccess() throws DAOException{
 
         Mockito.doReturn(testUser).when(userServiceMock).getByEmail("test@gmail.com");
         Mockito.doReturn(true).when(securityManagerMock).checkPass("plainPassword","pswHash");
@@ -114,7 +115,7 @@ public class AuthManagerTest {
     }
 
     @Test
-    public void testTryLoginWithFail(){
+    public void testTryLoginWithFail() throws DAOException{
         Mockito.doReturn(null).when(userServiceMock).getByEmail("test@gmail.com");
 
         boolean success = authManagerSpy.tryLogin("plainPassword", "test@gmail.com");

@@ -1,5 +1,6 @@
 package com.softserve.ita.demo1.services.impl;
 
+import com.softserve.ita.demo1.DAO.exception.DAOException;
 import com.softserve.ita.demo1.DAO.interfaces.UserDAO;
 import com.softserve.ita.demo1.DAO.impl.UserDAOImpl;
 import com.softserve.ita.demo1.entities.User;
@@ -11,14 +12,14 @@ public class UserServiceImpl implements UserService {
 
     private UserDAO userDAO;
 
-    public UserServiceImpl(){
+    public UserServiceImpl() {
         userDAO = new UserDAOImpl();
     }
 
     @Override
-    public User getById(Integer id) {
+    public User getById(Integer id) throws DAOException {
 
-        if(id <= 0){
+        if (id == null) {
             throw new IllegalArgumentException("Id must be positive");
         }
 
@@ -26,46 +27,43 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() throws DAOException {
         return userDAO.getAllUsers();
     }
 
     @Override
-    public void update(User user) {
+    public void update(User user) throws DAOException {
 
-        if(user == null){
+        if (user == null) {
             throw new IllegalArgumentException("user cannot be null");
         }
-
         userDAO.update(user);
-
     }
 
     @Override
-    public void add(User user) {
+    public void add(User user) throws DAOException {
 
-        if(user == null){
+        if (user == null) {
             throw new IllegalArgumentException("user cannot be null");
         }
 
         userDAO.add(user);
-
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Integer id) throws DAOException {
 
-        if(id <= 0){
-            throw new IllegalArgumentException("Id must be positive");
+        if (id == null) {
+            throw new IllegalArgumentException("Id cannot be null");
         }
 
         userDAO.delete(id);
     }
 
     @Override
-    public User getByEmail(String email){
+    public User getByEmail(String email) throws DAOException {
 
-        if(email == null || email.isEmpty()){
+        if (email == null || email.isEmpty()) {
             throw new IllegalArgumentException("Email must be present");
         }
 

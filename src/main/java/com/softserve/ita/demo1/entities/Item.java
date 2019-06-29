@@ -1,18 +1,20 @@
 package com.softserve.ita.demo1.entities;
 
+import com.softserve.ita.demo1.DAO.exception.DAOException;
 import com.softserve.ita.demo1.services.interfaces.CategoryService;
 import com.softserve.ita.demo1.services.impl.CategoryServiceImpl;
 
+import javax.servlet.ServletException;
 import java.util.Objects;
 
 public class Item {
 
 
-    private int id;
+    private Integer id;
     private String title;
     private String description;
     private String alias;
-    private int categoriesId;
+    private Integer categoriesId;
     private String createdAt;
     private Integer price;
     private String img;
@@ -21,9 +23,14 @@ public class Item {
 
     }
 
-    public Category getCategory(){
+    public Category getCategory() throws ServletException{
         CategoryService categoryService = new CategoryServiceImpl();
-        return categoryService.getById(categoriesId);
+        try {
+            return categoryService.getById(categoriesId);
+        } catch (DAOException e) {
+            throw new ServletException(e.getMessage());
+        }
+
     }
 
     public String getImg() {

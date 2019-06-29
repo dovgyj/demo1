@@ -1,6 +1,7 @@
 package com.softserve.ita.demo1.util.security;
 
 import com.google.gson.Gson;
+import com.softserve.ita.demo1.DAO.exception.DAOException;
 import com.softserve.ita.demo1.entities.Auntification;
 import com.softserve.ita.demo1.entities.User;
 import com.softserve.ita.demo1.services.interfaces.AuntificationService;
@@ -42,7 +43,7 @@ public class AuthManager {
 
     }
 
-    public boolean tryLogin(String password, String email) {
+    public boolean tryLogin(String password, String email) throws DAOException {
 
         User user = userService.getByEmail(email);
 
@@ -61,7 +62,7 @@ public class AuthManager {
         this.session.setAttribute("auntificatedUser", user);
     }
 
-    public void logout() {
+    public void logout() throws DAOException{
         this.setUser(null);
         this.session.removeAttribute("auntificatedUser");
         this.deleteCookieFromDatabase();
@@ -80,12 +81,7 @@ public class AuthManager {
         return this.user == null;
     }
 
-    public void loginUsingId(Integer id) {
-        User user = userService.getById(id);
-        this.login(user);
-    }
-
-    public void tryLoginByCookie(RememberMeCookie rememberMeCookie) {
+    public void tryLoginByCookie(RememberMeCookie rememberMeCookie) throws DAOException {
         if (rememberMeCookie != null) {
             Auntification auntification = this.auntificationService.getBySelector(rememberMeCookie.getSelector());
             if (auntification != null) {
@@ -97,7 +93,7 @@ public class AuthManager {
         }
     }
 
-    public void deleteCookieFromDatabase() {
+    public void deleteCookieFromDatabase() throws DAOException {
         Gson gson = new Gson();
         Cookie[] reqCookies = this.httpServletRequest.getCookies();
         if (reqCookies != null) {
@@ -110,7 +106,7 @@ public class AuthManager {
         }
     }
 
-    public void setRememberMeCookie() {
+    public void setRememberMeCookie() throws DAOException {
         String selector = this.securityManager.generateSelector();
         String validator = this.securityManager.generateRememberMeToken();
         String hasedValidator = this.securityManager.hashRememberMeToken(validator);

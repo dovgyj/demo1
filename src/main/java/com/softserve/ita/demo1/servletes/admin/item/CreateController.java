@@ -28,13 +28,18 @@ public class CreateController extends HttpServlet {
         super.init();
 
         categoryService = new CategoryServiceImpl();
-        itemService  = new ItemServiceImpl();
+        itemService = new ItemServiceImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Category> categories = categoryService.getAll();
-        req.setAttribute("categories", categories);
+
+        try {
+            List<Category> categories = categoryService.getAll();
+            req.setAttribute("categories", categories);
+        } catch (DAOException e) {
+            throw new ServletException(e.getMessage(), e);
+        }
 
         req.getRequestDispatcher("/views/admin/item/create.jsp").forward(req, resp);
     }
@@ -42,48 +47,38 @@ public class CreateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String title = req.getParameter("title");
-        if(title == null){
-            throw new ServletException("title is null");
-        }
         String description = req.getParameter("description");
-        if(description == null){
-            throw new ServletException("description is null");
-        }
-
         String categoryIdString = req.getParameter("categories_id");
-        if(categoryIdString == null){
-            throw new ServletException("categories_id is null");
-        }
-
         String priceString = req.getParameter("price");
-        if(priceString == null){
-            throw new ServletException("price is null");
+
+        if(title == null || description == null || categoryIdString == null || priceString == null){
+            resp.setStatus(400);
+        }else{
+            Integer categoryId = null;
+            Integer price = null;
+
+            try {
+                categoryId = Integer.valueOf(categoryIdString);
+                price = Integer.valueOf(priceString);
+            } catch (NumberFormatException e) {
+                throw new ServletException(e.getMessage());
+            }
+
+
+            Item item = new Item();
+            item.setTitle(title);
+            item.setDescription(description);
+            item.setCategoriesId(categoryId);
+            item.setPrice(price);
+
+            try {
+                itemService.add(item);
+            } catch (DAOException | IllegalArgumentException e) {
+                throw new ServletException(e.getMessage());
+            }
+
+            resp.sendRedirect("/admin/item/index");
         }
-
-        Integer categoryId = null;
-        Integer price = null;
-
-        try {
-            categoryId = Integer.valueOf(categoryIdString);
-            price = Integer.valueOf(priceString);
-        } catch (NumberFormatException e){
-            throw new ServletException(e.getMessage());
-        }
-
-
-        Item item = new Item();
-        item.setTitle(title);
-        item.setDescription(description);
-        item.setCategoriesId(categoryId);
-        item.setPrice(price);
-
-        try {
-            itemService.add(item);
-        } catch (DAOException | IllegalArgumentException e){
-            throw new ServletException(e.getMessage());
-        }
-
-        resp.sendRedirect("/admin/item/index");
 
 
     }

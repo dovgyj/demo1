@@ -1,9 +1,11 @@
 package com.softserve.ita.demo1.filters;
 
 import com.google.gson.Gson;
+import com.softserve.ita.demo1.DAO.exception.DAOException;
 import com.softserve.ita.demo1.util.security.AuthManager;
 import com.softserve.ita.demo1.util.security.RememberMeCookie;
 
+import javax.security.sasl.SaslException;
 import javax.servlet.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +27,6 @@ public class RequestAuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        // String uri = req.getRequestURI();
-        //this.context.log("Requested Resource::"+uri);
-
         HttpSession session = req.getSession(true);
 
         AuthManager authManager = new AuthManager(session,res,req);
@@ -39,7 +38,11 @@ public class RequestAuthFilter implements Filter {
                 for (Cookie cookie : reqCookies) {
                     if (cookie.getName().equals("remember-me")) {
                         RememberMeCookie rememberMeCookie = gson.fromJson(cookie.getValue(), RememberMeCookie.class);
-                        authManager.tryLoginByCookie(rememberMeCookie);
+                        try {
+                            authManager.tryLoginByCookie(rememberMeCookie);
+                        } catch (DAOException e) {
+                            throw new ServletException(e.getMessage(),e);
+                        }
                     }
                 }
             }
