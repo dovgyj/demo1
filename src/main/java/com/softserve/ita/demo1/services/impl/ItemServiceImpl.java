@@ -54,4 +54,12 @@ public class ItemServiceImpl implements ItemService {
     public List<Item> getAll() throws DAOException{
         return itemDAO.getAll();
     }
+
+    @Override
+    public List<Item> getByCategoryId(Integer id) throws DAOException {
+        if(id == null) {
+            throw new IllegalArgumentException("Id is null");
+        }
+        return itemDAO.getByCategoryId(id);
+    }
 }

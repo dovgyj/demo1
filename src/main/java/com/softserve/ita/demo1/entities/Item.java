@@ -5,10 +5,10 @@ import com.softserve.ita.demo1.services.interfaces.CategoryService;
 import com.softserve.ita.demo1.services.impl.CategoryServiceImpl;
 
 import javax.servlet.ServletException;
+import java.io.InputStream;
 import java.util.Objects;
 
 public class Item {
-
 
     private Integer id;
     private String title;
@@ -17,13 +17,13 @@ public class Item {
     private Integer categoriesId;
     private String createdAt;
     private Integer price;
-    private String img;
+    private InputStream img;
 
-    public Item(){
+    public Item() {
 
     }
 
-    public Category getCategory() throws ServletException{
+    public Category getCategory() throws ServletException {
         CategoryService categoryService = new CategoryServiceImpl();
         try {
             return categoryService.getById(categoriesId);
@@ -33,11 +33,11 @@ public class Item {
 
     }
 
-    public String getImg() {
+    public InputStream getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(InputStream img) {
         this.img = img;
     }
 
@@ -49,7 +49,7 @@ public class Item {
         this.price = price;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -65,7 +65,7 @@ public class Item {
         return alias;
     }
 
-    public int getCategoriesId() {
+    public Integer getCategoriesId() {
         return categoriesId;
     }
 
@@ -102,12 +102,7 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return id == item.id &&
-                categoriesId == item.categoriesId &&
-                title.equals(item.title) &&
-                Objects.equals(description, item.description) &&
-                alias.equals(item.alias) &&
-                Objects.equals(createdAt, item.createdAt);
+        return id == item.id;
     }
 
     @Override

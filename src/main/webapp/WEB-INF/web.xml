@@ -66,7 +66,7 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Item</servlet-name>
-    <url-pattern>/item/1</url-pattern>
+    <url-pattern>/item/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>About</servlet-name>

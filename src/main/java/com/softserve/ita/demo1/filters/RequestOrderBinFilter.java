@@ -1,16 +1,18 @@
 package com.softserve.ita.demo1.filters;
 
-import com.softserve.ita.demo1.util.security.AuthManager;
+import com.softserve.ita.demo1.util.OrderBin;
 
 import javax.servlet.*;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class RequestAdminFilter implements Filter {
+@WebFilter(urlPatterns = "/*")
+public class RequestOrderBinFilter implements Filter {
 
     private ServletContext context;
 
-    @Override
     public void init(FilterConfig fConfig) throws ServletException {
         this.context = fConfig.getServletContext();
         this.context.log("AuthenticationFilter initialized");
@@ -18,16 +20,12 @@ public class RequestAdminFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        AuthManager authManager = (AuthManager) servletRequest.getAttribute("Auth");
-        HttpServletResponse resp = (HttpServletResponse) servletResponse;
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpSession session = request.getSession(true);
+        OrderBin orderBin = new OrderBin(session);
+        request.setAttribute("orderBin", orderBin);
 
-        if (authManager.guest() || !authManager.getUser().isAdmin()) {
-            resp.sendRedirect("/login");
-        }else{
-            filterChain.doFilter(servletRequest,servletResponse);
-        }
-
-
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     public void destroy() {

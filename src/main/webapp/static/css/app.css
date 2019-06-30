@@ -190,3 +190,8 @@
 .categories__item{
     background: rgba(153, 153, 153, 0.2);
 }
+
+
+.content{
+    min-height: calc(100% - 60px);
+}

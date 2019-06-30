@@ -40,7 +40,7 @@ public class ItemDAOImpl implements ItemDAO {
                 item.setPrice(rezult.getInt(4));
                 item.setCreatedAt(rezult.getString(5));
                 item.setCategoriesId(rezult.getInt(6));
-                item.setImg(rezult.getNString(7));
+                item.setImg(rezult.getBinaryStream(7));
                 item.setId(id);
 
                 return item;
@@ -75,7 +75,7 @@ public class ItemDAOImpl implements ItemDAO {
             statement.setString(2, item.getTitle());
             statement.setInt(3, item.getPrice());
             statement.setString(4, item.getDescription());
-            statement.setString(5, item.getImg());
+            statement.setBlob(5, item.getImg());
             statement.setInt(6, item.getCategoriesId());
             statement.setInt(7, item.getId());
             statement.execute();
@@ -108,7 +108,7 @@ public class ItemDAOImpl implements ItemDAO {
             statement.setString(3, item.getAlias());
             statement.setInt(4, item.getPrice());
             statement.setInt(5, item.getCategoriesId());
-            statement.setString(6, item.getImg());
+            statement.setBlob(6, item.getImg());
             statement.execute();
 
         } catch (SQLException e) {
@@ -168,7 +168,7 @@ public class ItemDAOImpl implements ItemDAO {
                 item.setPrice(rezult.getInt(4));
                 item.setCreatedAt(rezult.getString(5));
                 item.setCategoriesId(rezult.getInt(6));
-                item.setImg(rezult.getNString(7));
+                item.setImg(rezult.getBinaryStream(7));
                 item.setId(rezult.getInt(8));
                 itemList.add(item);
             }
@@ -190,5 +190,38 @@ public class ItemDAOImpl implements ItemDAO {
         }
 
 
+    }
+
+    @Override
+    public List<Item> getByCategoryId(Integer id) throws DAOException {
+        String query = "SELECT title,description,alias,price,created_at,categories_id,img,id FROM goods "
+                + "WHERE categories_id = ?";
+
+        try (PreparedStatement smtatement = connection.prepareStatement(query)) {
+            smtatement.setInt(1,id);
+            ResultSet rezult = smtatement.executeQuery();
+            List<Item> itemList = new ArrayList<>();
+
+            while (rezult.next()) {
+                Item item = new Item();
+                item.setTitle(rezult.getNString(1));
+                item.setDescription(rezult.getNString(2));
+                item.setAlias(rezult.getNString(3));
+                item.setPrice(rezult.getInt(4));
+                item.setCreatedAt(rezult.getString(5));
+                item.setCategoriesId(rezult.getInt(6));
+                item.setImg(rezult.getBinaryStream(7));
+                item.setId(rezult.getInt(8));
+                itemList.add(item);
+            }
+
+            return itemList;
+
+
+        } catch (SQLException e) {
+            System.out.println("Cannot execute getByCategoryId in ItemDAO");
+            LOGGER.error("Cannot execute getByCategoryId in ItemDAO");
+            throw new DAOException("Cannot execute getByCategoryId in ItemDAO");
+        }
     }
 }

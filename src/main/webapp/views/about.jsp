@@ -16,7 +16,7 @@
 <body class="bg-light-gray">
 <jsp:include page="components/navbar.jsp"/>
 
-<div class="container mt-3">
+<div class="container mt-3 content">
     <div class="about">
         <h1 class="about__heading mb-0">About Us</h1>
         <img src="${pageContext.request.contextPath}/static/img/team.png" class="about__img mt-0 mb-3" alt="">

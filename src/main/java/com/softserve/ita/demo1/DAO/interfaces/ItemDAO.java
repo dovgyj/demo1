@@ -12,4 +12,5 @@ public interface ItemDAO {
     void add(Item item) throws DAOException;
     void delete(Integer id) throws DAOException;
     List<Item> getAll() throws DAOException;
+    List<Item> getByCategoryId(Integer id) throws DAOException;
 }

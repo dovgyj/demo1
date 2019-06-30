@@ -19,9 +19,13 @@
             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
         </form>
         <c:if test="${!Auth.guest()}">
-            <a href="${pageContext.request.contextPath}/bin" class="nav-link nav-link-shopping-basket">
+            <a href="${pageContext.request.contextPath}/bin" class="nav-link nav-link-shopping-basket" id="nav-basket-link">
                 <i class="fas fa-shopping-basket"></i>
-                <span class="badge badge-primary badge-pill shoping-basket-badge">2</span>
+                <c:if test="${orderBin.isNotEmpty()}">
+                    <span class="badge badge-primary badge-pill shoping-basket-badge" id="shoping-basket-counter">
+                        <c:out value="${orderBin.count()}"></c:out>
+                    </span>
+                </c:if>
             </a>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -37,9 +41,13 @@
     <c:if test="${Auth.guest()}">
         <ul class="navbar-nav nav-login-links">
             <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/bin" class="nav-link nav-link-shopping-basket">
+                <a href="${pageContext.request.contextPath}/bin" class="nav-link nav-link-shopping-basket" id="nav-basket-link">
                     <i class="fas fa-shopping-basket"></i>
-                    <span class="badge badge-primary badge-pill shoping-basket-badge">2</span>
+                    <c:if test="${orderBin.isNotEmpty()}">
+                    <span class="badge badge-primary badge-pill shoping-basket-badge" id="shoping-basket-counter">
+                        <c:out value="${orderBin.count()}"></c:out>
+                    </span>
+                    </c:if>
                 </a>
             </li>
             <li class="nav-item">

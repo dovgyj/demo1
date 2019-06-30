@@ -9,7 +9,7 @@
 <body>
 <jsp:include page="components/navbar.jsp" />
 
-<div class="mt-2">
+<div class="mt-2 content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-2 col-md-4 mt-3">
@@ -31,111 +31,57 @@
             </div>
             <div class="col-lg-10 col-md-8">
                 <div class="row">
-                    <div class="col-lg-3 home-card-container">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top home-card__img" src="/static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
-                            <div class="card-body">
-                                <h5 class="card-title">Headphone X</h5>
-                                <h6 class="item-preview__price">900grn</h6>
-                                <p class="card-text">Smaller headphones, often called earbuds or earphones, are placed inside the outer part of your ear canal. Like speakers...</p>
-                                <a href="/item/1" class="btn btn-primary mr-2">See more</a>
-                                <button type="button" class="btn btn-raised btn-primary ml-5">
-                                    <i class="fas fa-shopping-basket item__shopping-basket-icon"></i>
-                                </button>
+                    <c:forEach var="item" items="${items}">
+                        <div class="col-lg-3 home-card-container">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top home-card__img" src="${pageContext.request.contextPath}/static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <c:out value="${item.title}"></c:out>
+                                    </h5>
+                                    <h6 class="item-preview__price">
+                                        <c:out value="${item.price}"></c:out>grn
+                                    </h6>
+                                    <p class="card-text">
+                                        <c:out value="${item.description}"></c:out>
+                                    </p>
+                                    <a href="/item/<c:out value="${item.id}"></c:out>" class="btn btn-primary mr-2">See more</a>
+                                    <c:if test="${orderBin.contains(item)}">
+                                        <button type="button" class="btn btn-raised btn-success ml-5 add-shoping-basket-button" data-item-id="<c:out value="${item.id}"></c:out>" data-in-bin="true">
+                                            <i class="fas fa-check-circle item__shopping-basket-icon"></i>
+                                        </button>
+                                    </c:if>
+                                    <c:if test="${!orderBin.contains(item)}">
+                                        <button type="button" class="btn btn-raised btn-primary ml-5 add-shoping-basket-button" data-item-id="<c:out value="${item.id}"></c:out>">
+                                            <i class="fas fa-shopping-basket item__shopping-basket-icon"></i>
+                                        </button>
+                                    </c:if>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 home-card-container">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top home-card__img" src="/static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
-                            <div class="card-body">
-                                <h5 class="card-title">Headphone X</h5>
-                                <h6 class="item-preview__price">900grn</h6>
-                                <p class="card-text">Smaller headphones, often called earbuds or earphones, are placed inside the outer part of your ear canal. Like speakers...</p>
-                                <a href="/item/1" class="btn btn-primary mr-2">See more</a>
-                                <button type="button" class="btn btn-raised btn-primary ml-5">
-                                    <i class="fas fa-shopping-basket item__shopping-basket-icon"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 home-card-container">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top home-card__img" src="/static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
-                            <div class="card-body">
-                                <h5 class="card-title">Headphone X</h5>
-                                <h6 class="item-preview__price">900grn</h6>
-                                <p class="card-text">Smaller headphones, often called earbuds or earphones, are placed inside the outer part of your ear canal. Like speakers...</p>
-                                <a href="/item/1" class="btn btn-primary mr-2">See more</a>
-                                <button type="button" class="btn btn-raised btn-primary ml-5">
-                                    <i class="fas fa-shopping-basket item__shopping-basket-icon"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 home-card-container">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top home-card__img" src="/static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
-                            <div class="card-body">
-                                <h5 class="card-title">Headphone X</h5>
-                                <h6 class="item-preview__price">900grn</h6>
-                                <p class="card-text">Smaller headphones, often called earbuds or earphones, are placed inside the outer part of your ear canal. Like speakers...</p>
-                                <a href="/item/1" class="btn btn-primary mr-2">See more</a>
-                                <button type="button" class="btn btn-raised btn-primary ml-5">
-                                    <i class="fas fa-shopping-basket item__shopping-basket-icon"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 home-card-container">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top home-card__img" src="/static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
-                            <div class="card-body">
-                                <h5 class="card-title">Headphone X</h5>
-                                <h6 class="item-preview__price">900grn</h6>
-                                <p class="card-text">Smaller headphones, often called earbuds or earphones, are placed inside the outer part of your ear canal. Like speakers...</p>
-                                <a href="/item/1" class="btn btn-primary mr-2">See more</a>
-                                <button type="button" class="btn btn-raised btn-primary ml-5">
-                                    <i class="fas fa-shopping-basket item__shopping-basket-icon"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 home-card-container">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top home-card__img" src="/static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
-                            <div class="card-body">
-                                <h5 class="card-title">Headphone X</h5>
-                                <h6 class="item-preview__price">900grn</h6>
-                                <p class="card-text">Smaller headphones, often called earbuds or earphones, are placed inside the outer part of your ear canal. Like speakers...</p>
-                                <a href="/item/1" class="btn btn-primary mr-2">See more</a>
-                                <button type="button" class="btn btn-raised btn-primary ml-5">
-                                    <i class="fas fa-shopping-basket item__shopping-basket-icon"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>
     </div>
-    <nav class="mt-4">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active">
-                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
+<%--    <nav class="mt-4">--%>
+<%--        <ul class="pagination justify-content-center">--%>
+<%--            <li class="page-item disabled">--%>
+<%--                <a class="page-link" href="#" tabindex="-1">Previous</a>--%>
+<%--            </li>--%>
+<%--            <li class="page-item"><a class="page-link" href="#">1</a></li>--%>
+<%--            <li class="page-item active">--%>
+<%--                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>--%>
+<%--            </li>--%>
+<%--            <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
+<%--            <li class="page-item">--%>
+<%--                <a class="page-link" href="#">Next</a>--%>
+<%--            </li>--%>
+<%--        </ul>--%>
+<%--    </nav>--%>
 </div>
 
 <%@ include file="components/footer.jsp" %>
+<script src="${pageContext.request.contextPath}/static/js/bin.js"></script>
 </body>
 </html>

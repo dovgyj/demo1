@@ -51,33 +51,31 @@ public class CreateController extends HttpServlet {
         String categoryIdString = req.getParameter("categories_id");
         String priceString = req.getParameter("price");
 
-        if(title == null || description == null || categoryIdString == null || priceString == null){
+        if (title == null || description == null || categoryIdString == null || priceString == null) {
             resp.setStatus(400);
-        }else{
+        } else {
             Integer categoryId = null;
             Integer price = null;
 
             try {
                 categoryId = Integer.valueOf(categoryIdString);
                 price = Integer.valueOf(priceString);
-            } catch (NumberFormatException e) {
-                throw new ServletException(e.getMessage());
-            }
 
-
-            Item item = new Item();
-            item.setTitle(title);
-            item.setDescription(description);
-            item.setCategoriesId(categoryId);
-            item.setPrice(price);
-
-            try {
+                Item item = new Item();
+                item.setTitle(title);
+                item.setDescription(description);
+                item.setCategoriesId(categoryId);
+                item.setPrice(price);
                 itemService.add(item);
+
+                resp.sendRedirect("/admin/item/index");
+            } catch (NumberFormatException e) {
+                resp.setStatus(400);
             } catch (DAOException | IllegalArgumentException e) {
                 throw new ServletException(e.getMessage());
             }
 
-            resp.sendRedirect("/admin/item/index");
+
         }
 
 
