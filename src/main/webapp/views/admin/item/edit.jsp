@@ -53,6 +53,9 @@
             <label for="description">Description</label>
             <textarea name="description" id="description" class="form-control" cols="30" rows="10" required><c:out value="${item.description}"></c:out></textarea>
         </div>
+        <c:if test="${item.img != null}">
+            <img src="data:image/jpg;base64,${item.img}" class="image" width="100px">
+        </c:if>
         <div class="form-group">
             <label for="img">Img</label>
             <input type="file" class="form-control" name="img" id="img">

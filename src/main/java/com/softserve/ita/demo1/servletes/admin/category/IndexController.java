@@ -29,7 +29,6 @@ public class IndexController extends HttpServlet {
         try {
             List<Category> categories = categoryService.getAll();
             req.setAttribute("categories", categories);
-            System.out.println(categories);
         } catch (DAOException e) {
             throw new ServletException(e.getMessage());
         }

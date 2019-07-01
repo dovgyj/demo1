@@ -27,7 +27,12 @@
                         <c:forEach var="item" items="${items}">
                             <div class="col-lg-3 home-card-container">
                                 <div class="card" style="width: 18rem;">
-                                    <img class="card-img-top home-card__img" src="${pageContext.request.contextPath}/static/img/example.jpg" alt="Card image cap" height="200px" width="50px">
+                                    <c:if test="${item.img != null}">
+                                        <img class="card-img-top home-card__img" src="<c:out value="data:image/jpg;base64,${item.img}"></c:out>" alt="Card image cap" height="200px" width="50px">
+                                    </c:if>
+                                    <c:if test="${item.img == null}">
+                                        <img class="card-img-top home-card__img" src="${pageContext.request.contextPath}/static/img/default.jpg" alt="Card image cap" height="200px" width="50px">
+                                    </c:if>
                                     <div class="card-body">
                                         <h5 class="card-title">
                                             <c:out value="${item.title}"></c:out>

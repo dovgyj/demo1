@@ -19,7 +19,7 @@
 <jsp:include page="../../components/admin/navbar.jsp"/>
 <div class="container">
     <h1 class="text-center mt-4">Create item</h1>
-    <form class="" method="post" action="${pageContext.request.contextPath}/admin/item/create">
+    <form class="" method="post" action="${pageContext.request.contextPath}/admin/item/create" enctype="multipart/form-data">
         <div class="form-group">
             <label for="category">Category</label>
             <select name="categories_id" id="category" required class="form-control">
@@ -43,6 +43,10 @@
         <div class="form-group">
             <label for="description">Description</label>
             <textarea name="description" id="description" class="form-control" cols="30" rows="10" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="img">Img</label>
+            <input type="file" class="form-control" name="img" id="img">
         </div>
         <button type="submit" class="btn btn-outline-primary mt-3">create</button>
     </form>

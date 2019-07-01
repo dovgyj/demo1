@@ -7,11 +7,13 @@ import com.softserve.ita.demo1.entities.Item;
 import com.softserve.ita.demo1.entities.Item;
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.servlet.ServletException;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,14 +42,32 @@ public class ItemDAOImpl implements ItemDAO {
                 item.setPrice(rezult.getInt(4));
                 item.setCreatedAt(rezult.getString(5));
                 item.setCategoriesId(rezult.getInt(6));
-                item.setImg(rezult.getString(7));
+//                item.setImg(rezult.getString(7));
+
+                Blob blob = rezult.getBlob(7);
+                if (blob != null) {
+                    InputStream inputStream1 = blob.getBinaryStream();
+                    ByteArrayOutputStream outputStream1 = new ByteArrayOutputStream();
+                    byte[] buffer1 = new byte[4096];
+                    int bytesRead1 = -1;
+                    while ((bytesRead1 = inputStream1.read(buffer1)) != -1) {
+                        outputStream1.write(buffer1, 0, bytesRead1);
+                    }
+
+                    byte[] imageBytes1 = outputStream1.toByteArray();
+                    String base64Image = Base64.getEncoder().encodeToString(imageBytes1);
+                    item.setImg(base64Image);
+                    inputStream1.close();
+                    outputStream1.close();
+                }
+
                 item.setId(id);
 
                 return item;
             }
 
 
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             System.out.println("Cannot execute getById in ItemDAO");
             LOGGER.error("Cannot execute getById in ItemDAO");
             throw new DAOException("Cannot execute getById in ItemDAO");
@@ -63,9 +83,26 @@ public class ItemDAOImpl implements ItemDAO {
         return null;
     }
 
+    protected void updatePhoto(Integer id, InputStream inputStream) throws DAOException {
+        String query = "UPDATE goods SET img = ? WHERE goods.id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(2, id);
+            statement.setBlob(1, inputStream);
+
+            if (statement.executeUpdate() == 0) {
+                LOGGER.error("Cannot execute updatePhoto in ItemDAO 0 rows affected");
+                throw new DAOException("Cannot updatePhoto add in ItemDAO 0 rows affected");
+            }
+
+        } catch (SQLException e) {
+            LOGGER.error("Cannot execute updatePhoto in ItemDAO");
+            throw new DAOException("Cannot updatePhoto add in ItemDAO");
+        }
+    }
+
     @Override
-    public void update(Item item) throws DAOException{
-        String query = "UPDATE goods SET goods.alias = ?,goods.title = ?,goods.price = ?,goods.description = ?,goods.img = ?,goods.categories_id = ?,goods.img = ?"
+    public void update(Item item) throws DAOException {
+        String query = "UPDATE goods SET goods.alias = ?,goods.title = ?,goods.price = ?,goods.description = ?,goods.categories_id = ?"
                 + " WHERE goods.id = ?";
 
         PreparedStatement statement = null;
@@ -75,14 +112,19 @@ public class ItemDAOImpl implements ItemDAO {
             statement.setString(2, item.getTitle());
             statement.setInt(3, item.getPrice());
             statement.setString(4, item.getDescription());
-            statement.setString(5, item.getImg());
-            statement.setInt(6, item.getCategoriesId());
-            statement.setInt(7, item.getId());
-            statement.setString(8, item.getImg());
-            statement.execute();
+            statement.setInt(5, item.getCategoriesId());
+            if (item.getImgInputStream() != null) {
+                updatePhoto(item.getId(), item.getImgInputStream());
+            }
+            statement.setInt(6, item.getId());
+
+
+            if (statement.executeUpdate() == 0) {
+                LOGGER.error("Cannot execute update in ItemDAO 0 rows afected");
+                throw new DAOException("Cannot execute add in ItemDAO 0 rows afected");
+            }
 
         } catch (SQLException e) {
-            System.out.println("Cannot execute update in ItemDAO");
             LOGGER.error("Cannot execute update in ItemDAO");
             throw new DAOException("Cannot execute add in ItemDAO");
         } finally {
@@ -96,7 +138,7 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
     @Override
-    public void add(Item item) throws DAOException{
+    public void add(Item item) throws DAOException {
         String query = "INSERT INTO goods(title, description, alias, price, created_at, categories_id, img) VALUES"
                 + " (?,?,?,?,CURRENT_TIMESTAMP,?,?)";
 
@@ -109,10 +151,18 @@ public class ItemDAOImpl implements ItemDAO {
             statement.setString(3, item.getAlias());
             statement.setInt(4, item.getPrice());
             statement.setInt(5, item.getCategoriesId());
-            statement.setString(6, item.getImg());
-            statement.execute();
 
+            if (item.getImgInputStream() != null) {
+                statement.setBlob(6, item.getImgInputStream());
+            } else {
+                statement.setNull(6, java.sql.Types.BLOB);
+            }
+            if (statement.executeUpdate() == 0) {
+                LOGGER.error("Cannot execute add in ItemDAO 0 rows affected");
+                throw new DAOException("Cannot add add in ItemDAO 0 rows affected");
+            }
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println("Cannot execute add in ItemDAO");
             LOGGER.error("Cannot execute add in ItemDAO");
             throw new DAOException("Cannot execute add in ItemDAO");
@@ -127,7 +177,7 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
     @Override
-    public void delete(Integer id) throws DAOException{
+    public void delete(Integer id) throws DAOException {
         String query = "DELETE FROM goods WHERE id = ?";
 
         PreparedStatement statement = null;
@@ -140,7 +190,7 @@ public class ItemDAOImpl implements ItemDAO {
             System.out.println("Cannot execute delete in ItemDAO");
             LOGGER.error("Cannot execute delete in ItemDAO");
             throw new DAOException("Cannot execute delete in ItemDAO");
-        }  finally {
+        } finally {
             try {
                 statement.close();
             } catch (SQLException e) {
@@ -151,7 +201,7 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
     @Override
-    public List<Item> getAll() throws DAOException{
+    public List<Item> getAll() throws DAOException {
         String query = "SELECT title,description,alias,price,created_at,categories_id,img,id FROM goods";
 
         PreparedStatement smtatement = null;
@@ -169,7 +219,24 @@ public class ItemDAOImpl implements ItemDAO {
                 item.setPrice(rezult.getInt(4));
                 item.setCreatedAt(rezult.getString(5));
                 item.setCategoriesId(rezult.getInt(6));
-                item.setImg(rezult.getString(7));
+
+
+                Blob blob = rezult.getBlob(7);
+                if (blob != null) {
+                    InputStream inputStream1 = blob.getBinaryStream();
+                    ByteArrayOutputStream outputStream1 = new ByteArrayOutputStream();
+                    byte[] buffer1 = new byte[4096];
+                    int bytesRead1 = -1;
+                    while ((bytesRead1 = inputStream1.read(buffer1)) != -1) {
+                        outputStream1.write(buffer1, 0, bytesRead1);
+                    }
+
+                    byte[] imageBytes1 = outputStream1.toByteArray();
+                    String base64Image = Base64.getEncoder().encodeToString(imageBytes1);
+                    item.setImg(base64Image);
+                    inputStream1.close();
+                    outputStream1.close();
+                }
                 item.setId(rezult.getInt(8));
                 itemList.add(item);
             }
@@ -177,8 +244,7 @@ public class ItemDAOImpl implements ItemDAO {
             return itemList;
 
 
-        } catch (SQLException e) {
-            System.out.println("Cannot execute getAll in ItemDAO");
+        } catch (SQLException | IOException e) {
             LOGGER.error("Cannot execute getAll in ItemDAO");
             throw new DAOException("Cannot execute getAll in ItemDAO");
         } finally {
@@ -199,7 +265,7 @@ public class ItemDAOImpl implements ItemDAO {
                 + "WHERE categories_id = ?";
 
         try (PreparedStatement smtatement = connection.prepareStatement(query)) {
-            smtatement.setInt(1,id);
+            smtatement.setInt(1, id);
             ResultSet rezult = smtatement.executeQuery();
             List<Item> itemList = new ArrayList<>();
 
@@ -212,6 +278,22 @@ public class ItemDAOImpl implements ItemDAO {
                 item.setCreatedAt(rezult.getString(5));
                 item.setCategoriesId(rezult.getInt(6));
                 item.setImg(rezult.getString(7));
+                Blob blob = rezult.getBlob(7);
+                if (blob != null) {
+                    InputStream inputStream1 = blob.getBinaryStream();
+                    ByteArrayOutputStream outputStream1 = new ByteArrayOutputStream();
+                    byte[] buffer1 = new byte[4096];
+                    int bytesRead1 = -1;
+                    while ((bytesRead1 = inputStream1.read(buffer1)) != -1) {
+                        outputStream1.write(buffer1, 0, bytesRead1);
+                    }
+
+                    byte[] imageBytes1 = outputStream1.toByteArray();
+                    String base64Image = Base64.getEncoder().encodeToString(imageBytes1);
+                    item.setImg(base64Image);
+                    inputStream1.close();
+                    outputStream1.close();
+                }
                 item.setId(rezult.getInt(8));
                 itemList.add(item);
             }
@@ -219,7 +301,7 @@ public class ItemDAOImpl implements ItemDAO {
             return itemList;
 
 
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             System.out.println("Cannot execute getByCategoryId in ItemDAO");
             LOGGER.error("Cannot execute getByCategoryId in ItemDAO");
             throw new DAOException("Cannot execute getByCategoryId in ItemDAO");

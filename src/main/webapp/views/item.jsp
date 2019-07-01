@@ -38,7 +38,12 @@
             <div class="col-lg-10 col-md-8">
                 <div class="row mt-2">
                     <div class="col-lg-4">
-                        <img src="http://localhost:9090/static/img/example.jpg" class="img-thumbnail item-img m-auto" alt="">
+                        <c:if test="${item.img != null}">
+                            <img class="img-thumbnail item-img m-auto" src="<c:out value="data:image/jpg;base64,${item.img}"></c:out>" alt="Card image cap" >
+                        </c:if>
+                        <c:if test="${item.img == null}">
+                            <img class="img-thumbnail item-img m-auto" src="${pageContext.request.contextPath}/static/img/default.jpg" alt="Card image cap" >
+                        </c:if>
                     </div>
                     <div class="col-lg-8">
                         <div class="item">

@@ -18,6 +18,7 @@ public class Item {
     private String createdAt;
     private Integer price;
     private String img;
+    private InputStream imgInputStream;
 
     public Item() {
 
@@ -39,6 +40,14 @@ public class Item {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public InputStream getImgInputStream() {
+        return imgInputStream;
+    }
+
+    public void setImgInputStream(InputStream imgInputStream) {
+        this.imgInputStream = imgInputStream;
     }
 
     public Integer getPrice() {

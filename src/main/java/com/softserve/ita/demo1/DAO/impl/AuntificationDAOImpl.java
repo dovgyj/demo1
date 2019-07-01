@@ -4,18 +4,24 @@ import com.softserve.ita.demo1.DAO.exception.DAOException;
 import com.softserve.ita.demo1.DAO.interfaces.AuntificationDAO;
 import com.softserve.ita.demo1.db.MySQLConnection;
 import com.softserve.ita.demo1.entities.Auntification;
-import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import static java.util.logging.Level.SEVERE;
 
 public class AuntificationDAOImpl implements AuntificationDAO {
 
-    private static final Logger LOGGER = Logger.getLogger(CategoryDAOImpl.class);
+    private final Logger LOGGER;
     private Connection connection = MySQLConnection.getConnection();
 
+    public AuntificationDAOImpl() {
+        LOGGER = LogManager.getLogger("DaoLogger");
+    }
     @Override
     public void delete(String selector) throws DAOException {
         String query = "DELETE FROM auntification WHERE selector = ?";
@@ -25,7 +31,7 @@ public class AuntificationDAOImpl implements AuntificationDAO {
             statement.execute();
 
         } catch (SQLException e){
-            LOGGER.error("Cannot execute delete in Auntification Dao");
+            LOGGER.log(Logger.ERROR,"Cannot execute delete in Auntification Dao");
             System.out.println("Cannot execute delete in Auntification Dao");
             throw new DAOException("Cannot execute delete in Auntification Dao");
         }

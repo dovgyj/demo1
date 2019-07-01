@@ -9,14 +9,18 @@ import com.softserve.ita.demo1.services.interfaces.CategoryService;
 import com.softserve.ita.demo1.services.interfaces.ItemService;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/admin/item/create")
+@MultipartConfig
 public class CreateController extends HttpServlet {
 
     private CategoryService categoryService;
@@ -66,6 +70,13 @@ public class CreateController extends HttpServlet {
                 item.setDescription(description);
                 item.setCategoriesId(categoryId);
                 item.setPrice(price);
+
+                Part filePart = req.getPart("img");
+                if (filePart != null && filePart.getSize() != 0) {
+                    InputStream imgStream =  filePart.getInputStream();
+                    item.setImgInputStream(imgStream);
+                }
+
                 itemService.add(item);
 
                 resp.sendRedirect("/admin/item/index");

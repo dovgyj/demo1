@@ -39,7 +39,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 
         } catch (SQLException e) {
-            System.out.println("Cannot execute getById category dao.");
             LOGGER.error("Cannot execute getById category dao.");
             throw new DAOException("Cannot execute getById category dao.");
         }
@@ -78,7 +77,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 
     @Override
     public List<Category> getAll() throws DAOException {
-
+        LOGGER.info("testinfo");
         String query = "SELECT categories.id, categories.name, categories.alias "
                 + "FROM categories";
 
@@ -102,7 +101,6 @@ public class CategoryDAOImpl implements CategoryDAO {
             return categories;
 
         } catch (SQLException e) {
-            System.err.println("Cannot execute 'getAll' category dao.");
             LOGGER.error("Cannot execute 'getAll' category dao.", e);
             throw new DAOException("Cannot execute 'getAll' category dao.");
 

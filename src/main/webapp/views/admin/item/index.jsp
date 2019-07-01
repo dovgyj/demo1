@@ -33,17 +33,26 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${items}"  var="item">
+        <c:forEach items="${items}" var="item">
             <tr>
                 <td><c:out value="${item.id}"></c:out></td>
                 <td><c:out value="${item.category.name}"></c:out></td>
                 <td><c:out value="${item.title}"></c:out></td>
                 <td><c:out value="${item.description}"></c:out></td>
                 <td><c:out value="${item.price}"></c:out></td>
-                <td><c:out value="${item.img}"></c:out></td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/admin/item/update/<c:out value="${item.id}"></c:out>" class="btn btn-outline-primary btn-sm mr-3">edit</a>
-                    <a href="${pageContext.request.contextPath}/admin/item/delete/<c:out value="${item.id}"></c:out>" class="btn btn-outline-danger btn-sm">delete</a>
+                    <c:if test="${item.img != null}">
+                        <img src="data:image/jpg;base64,${item.img}" width="100px">
+                    </c:if>
+                    <c:if test="${item.img == null}">
+                        <img src="${pageContext.request.contextPath}/static/img/default.jpg" width="100px">
+                    </c:if>
+                </td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/admin/item/update/<c:out value="${item.id}"></c:out>"
+                       class="btn btn-outline-primary btn-sm mr-3">edit</a>
+                    <a href="${pageContext.request.contextPath}/admin/item/delete/<c:out value="${item.id}"></c:out>"
+                       class="btn btn-outline-danger btn-sm">delete</a>
                 </td>
             </tr>
         </c:forEach>
