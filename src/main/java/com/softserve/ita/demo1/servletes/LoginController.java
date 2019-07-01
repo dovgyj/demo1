@@ -44,7 +44,7 @@ public class LoginController extends HttpServlet {
                     }
 
                     if (authManager.getUser().isAdmin()) {
-                        resp.sendRedirect("/admin/dashboard");
+                        resp.sendRedirect("/admin/item/index");
                     } else {
                         resp.sendRedirect("/");
                     }

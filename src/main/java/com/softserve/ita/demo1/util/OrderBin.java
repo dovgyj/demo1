@@ -39,6 +39,7 @@ public class OrderBin {
         session.setAttribute("itemsInBin", itemList);
     }
 
+
     public List<Item> getItemList() {
         return itemList;
     }

@@ -106,8 +106,9 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User getByEmail(String email) throws DAOException {
-        String query = "SELECT id,name,email,role,password FROM users"
-                + " WHERE email = ?";
+        String query = "SELECT users.id,name,email,role,password,NOT(ISNULL(blacklist.id)) as blocked FROM users "
+                + "LEFT JOIN blacklist ON users.id = blacklist.user_id"
+                + " WHERE users.email = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, email);
@@ -120,7 +121,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setEmail(resultSet.getNString(3));
                 user.setRole(resultSet.getNString(4));
                 user.setPassword(resultSet.getNString(5));
-
+                user.setBlocked(resultSet.getBoolean(6));
                 return user;
             }
 
@@ -128,7 +129,6 @@ public class UserDAOImpl implements UserDAO {
 
 
         } catch (SQLException e) {
-            System.out.println("Cannot execute getByEmailAndPassword in UserDAO");
             LOGGER.error("Cannot execute getByEmailAndPassword in UserDAO");
             throw new DAOException("Cannot execute getByEmailAndPassword in UserDAO");
         }

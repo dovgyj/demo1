@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>DashBoard</title>
+    <title>Orders</title>
     <link rel="stylesheet"
           href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
           integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
@@ -18,29 +18,28 @@
 <body>
 <jsp:include page="../../components/admin/navbar.jsp"/>
 <div class="container">
-    <h1 class="text-center mt-4">Users</h1>
+    <h1 class="text-center mt-4">Orders</h1>
     <table class="table table-bordered mt-3">
         <thead class="thead-dark">
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Block</th>
+            <th>User name</th>
+            <th>User email</th>
+            <th>payed at</th>
+            <th>total price</th>
+            <th>#</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${users}"  var="user">
+        <c:forEach items="${orders}"  var="order">
             <tr>
-                <td><c:out value="${user.id}"></c:out></td>
-                <td><c:out value="${user.name}"></c:out></td>
-                <td><c:out value="${user.email}"></c:out></td>
+                <td><c:out value="${order.id}"></c:out></td>
+                <td><c:out value="${order.user.name}"></c:out></td>
+                <td><c:out value="${order.user.email}"></c:out></td>
+                <td><c:out value="${order.payedAt}"></c:out></td>
+                <td><c:out value="${order.totalPrice}"></c:out></td>
                 <td>
-                    <c:if test="${!user.isBlocked()}">
-                        <a href="${pageContext.request.contextPath}/admin/user/blacklist/add/<c:out value="${user.id}"></c:out>" class="btn btn-outline-danger btn-sm">block</a>
-                    </c:if>
-                    <c:if test="${user.isBlocked()}">
-                        <a href="${pageContext.request.contextPath}/admin/user/blacklist/remove/<c:out value="${user.id}"></c:out>" class="btn btn-outline-primary btn-sm mr-3">unblock</a>
-                    </c:if>
+                    <a href="${pageContext.request.contextPath}/admin/order/delete/<c:out value="${order.id}"></c:out>" class="btn btn-outline-danger btn-sm">delete</a>
                 </td>
             </tr>
         </c:forEach>

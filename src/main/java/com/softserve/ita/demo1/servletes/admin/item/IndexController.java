@@ -33,5 +33,5 @@ public class IndexController extends HttpServlet {
         }
         req.setAttribute("items", itemList);
         req.getRequestDispatcher("/views/admin/item/index.jsp").forward(req, resp);
-    }
+}
 }

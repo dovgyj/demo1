@@ -15,23 +15,24 @@ public class User {
     private UserRole role;
     private Boolean isBlocked;
 
-    public boolean isBlocked() {
+    public Boolean isBlocked() {
         return isBlocked;
     }
 
-    public void setBlocked(boolean blocked) {
+    public void setBlocked(Boolean blocked) {
         isBlocked = blocked;
     }
 
-    public User(){
+    public User() {
+        this.isBlocked = false;
         this.role = UserRole.USER;
     }
 
     public User(String name, String password, String email) {
+        this();
         this.name = name;
         this.password = password;
         this.email = email;
-        this.role = UserRole.USER;
     }
 
     public Integer getId() {
@@ -88,6 +89,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", blocked='" + isBlocked + '\'' +
                 ", role=" + role +
                 '}';
     }

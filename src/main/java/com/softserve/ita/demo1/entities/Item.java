@@ -17,7 +17,7 @@ public class Item {
     private Integer categoriesId;
     private String createdAt;
     private Integer price;
-    private InputStream img;
+    private String img;
 
     public Item() {
 
@@ -33,11 +33,11 @@ public class Item {
 
     }
 
-    public InputStream getImg() {
+    public String getImg() {
         return img;
     }
 
-    public void setImg(InputStream img) {
+    public void setImg(String img) {
         this.img = img;
     }
 

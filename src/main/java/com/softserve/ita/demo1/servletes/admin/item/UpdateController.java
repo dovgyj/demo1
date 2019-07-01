@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/admin/item/update/*")
@@ -85,22 +87,47 @@ public class UpdateController extends HttpServlet {
                 item.setTitle(title);
                 item.setCategoriesId(categoryId);
 
-                /*
+
                 //----------------
                 InputStream ImgInputStream = null; // input stream of the upload file
 
                 // obtains the upload file part in this multipart request
                 Part filePart = req.getPart("img");
                 if (filePart != null) {
-                    ImgInputStream = filePart.getInputStream();
-                    item.setImg(ImgInputStream);
-                }
-                */
+                    ByteArrayInputStream imgStream = (ByteArrayInputStream) filePart.getInputStream();
+                    imgStream.toB
+                    //
+                    ArrayList<Byte> bytesList = new ArrayList<>();
+                    byte ch;
+                    while ((ch = (byte)ImgInputStream.read()) != -1) {
+                        bytesList.add(ch);
+                    }
+                    byte[] bytes = new byte[bytesList.size()];
+                    for (int i = 0; i < bytesList.size(); i++) {
+                        bytes[i] = bytesList.get(i);
+                    }
 
-                itemService.update(item);
+                    //ImgInputStream.read(bytes);//ByteStreams.toByteArray(in)ImgInputStream.get
+
+                    String base64Img = Base64.getEncoder().encodeToString(bytes);
+                    item.setImg(base64Img);
+
+                    System.out.println(base64Img);
+                    throw new ServletException(base64Img);
+                   /* InputStream finput = new FileInputStream(file);
+                    byte[] imageBytes = new byte[(int)file.length()];
+                    finput.read(imageBytes, 0, imageBytes.length);
+                    finput.close();
+                    String imageStr = Base64.encodeBase64String(imageBytes);*/
+                } else {
+                    throw new ServletException("ss");
+                }
+
+
+               // itemService.update(item);
 
                 //----------------
-                resp.sendRedirect("/admin/item/update/" + item.getId());
+               // resp.sendRedirect("/admin/item/update/" + item.getId());
             } catch (DAOException e) {
                 throw new ServletException(e.getMessage());
             } catch (NumberFormatException e) {
@@ -108,6 +135,32 @@ public class UpdateController extends HttpServlet {
             }
         }
 
+    }
+
+    public static byte[] getImageById(String imageId) {
+        ConnectionPool dataSource = ConnectionPool.getInstance();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        String query = "SELECT image FROM books WHERE id = ?";
+        try(Connection conn = dataSource.getConnection()){
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, Integer.parseInt(imageId));
+
+            rs =  stmt.executeQuery();
+
+            rs.next();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            baos.write(rs.getBytes("image"));
+
+            return baos.toByteArray();
+
+        }catch (SQLException | IOException e){
+            throw new DAOException(e.getMessage(), e);
+        }finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closeStatement(stmt);
+        }
     }
 
     protected void uploadFoto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -153,3 +206,11 @@ public class UpdateController extends HttpServlet {
         return null;
     }
 }
+
+
+/**
+ *  Предзаказ 500ш
+ *
+ *
+ *
+ */

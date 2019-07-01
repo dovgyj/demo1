@@ -29,7 +29,7 @@ public class RequestAuthFilter implements Filter {
 
         HttpSession session = req.getSession(true);
 
-        AuthManager authManager = new AuthManager(session,res,req);
+        AuthManager authManager = new AuthManager(session, res, req);
 
         if (authManager.guest()) {
             Gson gson = new Gson();
@@ -41,7 +41,7 @@ public class RequestAuthFilter implements Filter {
                         try {
                             authManager.tryLoginByCookie(rememberMeCookie);
                         } catch (DAOException e) {
-                            throw new ServletException(e.getMessage(),e);
+                            throw new ServletException(e.getMessage(), e);
                         }
                     }
                 }
@@ -50,7 +50,12 @@ public class RequestAuthFilter implements Filter {
 
         request.setAttribute("Auth", authManager);
 
-        chain.doFilter(request, response);
+        if (!authManager.guest() && !authManager.getUser().isAdmin() && authManager.getUser().isBlocked()) {
+            req.getRequestDispatcher("/views/userblocked.jsp").forward(req, res);
+        } else {
+            chain.doFilter(request, response);
+        }
+
 
     }
 

@@ -17,7 +17,7 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/admin/users">Users</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/about">Orders</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/order/index">Orders</a>
             </li>
         </ul>
 
