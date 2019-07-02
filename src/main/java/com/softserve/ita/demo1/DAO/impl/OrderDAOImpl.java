@@ -93,7 +93,6 @@ public class OrderDAOImpl implements OrderDAO {
                     item.setPrice(itemResultSet.getInt(4));
                     item.setCreatedAt(itemResultSet.getString(5));
                     item.setCategoriesId(itemResultSet.getInt(6));
-                    // item.setImg(itemResultSet.getBinaryStream(7));
                     item.setId(itemResultSet.getInt(8));
                     itemList.add(item);
                 }
@@ -104,7 +103,6 @@ public class OrderDAOImpl implements OrderDAO {
 
         } catch (SQLException e) {
             LOGGER.error("Cannot execute getAll in Order dao");
-            e.printStackTrace();
             throw new DAOException("Cannot execute getAll in Order dao");
         }
     }
@@ -145,7 +143,6 @@ public class OrderDAOImpl implements OrderDAO {
                     item.setPrice(itemResultSet.getInt(4));
                     item.setCreatedAt(itemResultSet.getString(5));
                     item.setCategoriesId(itemResultSet.getInt(6));
-                    // item.setImg(itemResultSet.getBinaryStream(7));
                     item.setId(itemResultSet.getInt(8));
                     itemList.add(item);
                 }

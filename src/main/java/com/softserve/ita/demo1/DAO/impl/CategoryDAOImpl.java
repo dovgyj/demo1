@@ -69,7 +69,6 @@ public class CategoryDAOImpl implements CategoryDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println("Cannot execute `getByAliasAll category dao.");
             LOGGER.error("Cannot execute `getByAliasAll category dao.");
             throw new DAOException("Cannot execute `getByAliasAll category dao.");
         }
@@ -79,7 +78,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 
     @Override
     public List<Category> getAll() throws DAOException {
-        LOGGER.info("testinfo");
         String query = "SELECT categories.id, categories.name, categories.alias "
                 + "FROM categories";
 
@@ -128,7 +126,6 @@ public class CategoryDAOImpl implements CategoryDAO {
             statement.execute();
 
         } catch (SQLException e) {
-            System.out.println("Cannot execute add in CategoryDAO");
             LOGGER.error("Cannot execute add in CategoryDAO");
             throw new DAOException("Cannot execute add in CategoryDAO");
         }
@@ -146,7 +143,6 @@ public class CategoryDAOImpl implements CategoryDAO {
             statement.execute();
 
         } catch (SQLException e) {
-            System.out.println("Cannot execute update in CategoryDAO");
             LOGGER.error("Cannot execute update in CategoryDAO");
             throw new DAOException("Cannot execute update in CategoryDAO");
         }
@@ -162,7 +158,6 @@ public class CategoryDAOImpl implements CategoryDAO {
             statement.execute();
 
         } catch (SQLException e) {
-            System.out.println("Cannot execute delete in UserDAO");
             LOGGER.error("Cannot execute delete in UserDAO");
             throw new DAOException("Cannot execute delete in UserDAO");
         }

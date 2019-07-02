@@ -40,7 +40,6 @@ public class ItemDAOImpl implements ItemDAO {
                 item.setPrice(rezult.getInt(4));
                 item.setCreatedAt(rezult.getString(5));
                 item.setCategoriesId(rezult.getInt(6));
-//                item.setImg(rezult.getString(7));
 
                 Blob blob = rezult.getBlob(7);
                 if (blob != null) {
@@ -66,7 +65,6 @@ public class ItemDAOImpl implements ItemDAO {
 
 
         } catch (SQLException | IOException e) {
-            System.out.println("Cannot execute getById in ItemDAO");
             LOGGER.error("Cannot execute getById in ItemDAO");
             throw new DAOException("Cannot execute getById in ItemDAO");
         } finally {
@@ -161,7 +159,6 @@ public class ItemDAOImpl implements ItemDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Cannot execute add in ItemDAO");
             LOGGER.error("Cannot execute add in ItemDAO");
             throw new DAOException("Cannot execute add in ItemDAO");
         } finally {
@@ -185,7 +182,6 @@ public class ItemDAOImpl implements ItemDAO {
             statement.execute();
 
         } catch (SQLException e) {
-            System.out.println("Cannot execute delete in ItemDAO");
             LOGGER.error("Cannot execute delete in ItemDAO");
             throw new DAOException("Cannot execute delete in ItemDAO");
         } finally {
@@ -300,7 +296,6 @@ public class ItemDAOImpl implements ItemDAO {
 
 
         } catch (SQLException | IOException e) {
-            System.out.println("Cannot execute getByCategoryId in ItemDAO");
             LOGGER.error("Cannot execute getByCategoryId in ItemDAO");
             throw new DAOException("Cannot execute getByCategoryId in ItemDAO");
         }

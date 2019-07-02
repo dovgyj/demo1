@@ -44,7 +44,6 @@ public class UserDAOImpl implements UserDAO {
             return null;
 
         } catch (SQLException e) {
-            System.out.println("Cannot execute getById in UserDAO");
             LOGGER.error("Cannot execute getById in UserDAO");
             throw new DAOException("Cannot execute getById in UserDAO");
         }
@@ -80,7 +79,6 @@ public class UserDAOImpl implements UserDAO {
             return userList;
 
         } catch (SQLException e) {
-            System.out.println("Cannot execute getAllUsers in UserDAO");
             LOGGER.error("Cannot execute getAllUsers in UserDAO");
             throw new DAOException("Cannot execute getAllUsers in UserDAO");
         }
@@ -99,7 +97,6 @@ public class UserDAOImpl implements UserDAO {
             statement.execute();
 
         } catch (SQLException e) {
-            System.out.println("Cannot execute add in UserDAO");
             LOGGER.error("Cannot execute add in UserDAO");
             throw new DAOException("Cannot execute add in UserDAO");
         }
@@ -148,7 +145,6 @@ public class UserDAOImpl implements UserDAO {
             statement.execute();
 
         } catch (SQLException e) {
-            System.out.println("Cannot execute delete in ItemDAO");
             LOGGER.error("Cannot execute delete in ItemDAO");
             throw new DAOException("Cannot execute delete in ItemDAO");
         }  finally {

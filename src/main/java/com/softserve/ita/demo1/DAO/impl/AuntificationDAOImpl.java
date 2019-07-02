@@ -30,7 +30,6 @@ public class AuntificationDAOImpl implements AuntificationDAO {
 
         } catch (SQLException e){
             LOGGER.error("Cannot execute delete in Auntification Dao");
-            System.out.println("Cannot execute delete in Auntification Dao");
             throw new DAOException("Cannot execute delete in Auntification Dao");
         }
     }
@@ -48,7 +47,6 @@ public class AuntificationDAOImpl implements AuntificationDAO {
 
         } catch (SQLException e){
             LOGGER.error("Cannot execute add in Auntification Dao");
-            System.out.println("Cannot execute add in Auntification Dao");
             throw new DAOException("Cannot execute add in Auntification Dao");
         }
     }
@@ -73,7 +71,6 @@ public class AuntificationDAOImpl implements AuntificationDAO {
 
         } catch (SQLException e){
             LOGGER.error("Cannot execute getBySelector in Auntification Dao");
-            System.out.println("Cannot execute getBySelector in Auntification Dao");
             throw new DAOException("Cannot execute getBySelector in Auntification Dao");
         }
 
