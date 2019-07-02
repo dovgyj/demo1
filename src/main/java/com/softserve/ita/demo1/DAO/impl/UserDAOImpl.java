@@ -1,11 +1,11 @@
 package com.softserve.ita.demo1.DAO.impl;
 
 import com.softserve.ita.demo1.DAO.exception.DAOException;
-import com.softserve.ita.demo1.DAO.impl.CategoryDAOImpl;
 import com.softserve.ita.demo1.DAO.interfaces.UserDAO;
 import com.softserve.ita.demo1.db.MySQLConnection;
 import com.softserve.ita.demo1.entities.User;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.Connection;
@@ -17,7 +17,8 @@ import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
-    private static final Logger LOGGER = Logger.getLogger(CategoryDAOImpl.class);
+    private static final Logger LOGGER = LogManager.getLogger("DaoLogger");
+
     private Connection connection = MySQLConnection.getConnection();
 
     @Override

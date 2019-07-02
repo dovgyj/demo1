@@ -20,12 +20,14 @@ public class RegisterController extends HttpServlet {
 
     private SecurityManager securityManager;
     private UserService userService;
+    private Validator validator;
 
     @Override
     public void init() throws ServletException {
         super.init();
         securityManager = new SecurityManager();
         userService = new UserServiceImpl();
+        validator = new Validator();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,7 +42,6 @@ public class RegisterController extends HttpServlet {
         String password = req.getParameter("password");
         String passwordConfirmation = req.getParameter("password_confirmation");
 
-        Validator validator = new Validator();
 
         if (!validator.hasMinLength(2, name) || !validator.isValidEmail(email) || !validator.hasMinLength(6, password) || !password.equals(passwordConfirmation)) {
             resp.setStatus(400);
@@ -54,10 +55,7 @@ public class RegisterController extends HttpServlet {
             }
 
 
-            AuthManager authManager = (AuthManager) req.getAttribute("Auth");
-            authManager.login(user);
-
-            resp.sendRedirect("/");
+            resp.sendRedirect("/login");
         }
 
 

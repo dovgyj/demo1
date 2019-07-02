@@ -39,13 +39,13 @@
                             <img class="card-img-top home-card__img" src="${pageContext.request.contextPath}/static/img/default.jpg" alt="Card image cap" height="200px" width="50px">
                         </c:if>
                         <div class="card-body">
-                            <h5 class="card-title">
+                            <h5 class="card-title home-card__title">
                                 <c:out value="${item.title}"></c:out>
                             </h5>
                             <h6 class="item-preview__price">
-                                <c:out value="${item.price}"></c:out>grn
+                                <c:out value="${item.price}"></c:out> UAH
                             </h6>
-                            <p class="card-text">
+                            <p class="card-text home-card__text">
                                 <c:out value="${item.description}"></c:out>
                             </p>
                             <a href="/item/<c:out value="${item.id}"></c:out>" class="btn btn-primary mr-2">See more</a>
@@ -88,8 +88,8 @@
                 </div>
                 <div class="form-group col-lg-3">
                     <label for="Expiry_mounth" class="ml-3">Expiry mounth</label>
-                    <input id="Expiry_mounth" type="text" class="form-control" name="Expiry_mounth" required maxlength="3"
-                           minlength="3" placeholder="Expiry mounth">
+                    <input id="Expiry_mounth" type="text" class="form-control" name="Expiry_mounth" required maxlength="2"
+                           minlength="1" placeholder="Expiry mounth">
                 </div>
             </div>
 

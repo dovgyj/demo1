@@ -11,7 +11,7 @@
 <head>
     <title>Item</title>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
-    <link rel="stylesheet" href="http://localhost:9090/static/css/app.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/app.css">
 </head>
 <body class="bg-light-gray">
 <jsp:include page="components/navbar.jsp"/>
@@ -52,7 +52,7 @@
                                 <c:out value="${item.description}"></c:out>
                             </div>
                             <div class="item__price mt-3">
-                                <c:out value="${item.price}"></c:out>grn
+                                <c:out value="${item.price}"></c:out> UAH
                             </div>
                             <div class="item__controls mt-3">
                                 <button type="button" class="btn btn-raised btn-primary">

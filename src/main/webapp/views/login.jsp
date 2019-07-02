@@ -19,7 +19,7 @@
     <form class="login-form" method="post" action="/login">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input value="admin@gmail.com" type="email" name="email" class="form-control <c:out value="${not empty error ? 'is-invalid':''}"></c:out>" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+            <input  type="email" name="email" class="form-control <c:out value="${not empty error ? 'is-invalid':''}"></c:out>" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>

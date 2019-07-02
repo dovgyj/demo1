@@ -4,16 +4,17 @@ import com.softserve.ita.demo1.DAO.exception.DAOException;
 import com.softserve.ita.demo1.DAO.interfaces.BlackListDAO;
 import com.softserve.ita.demo1.db.MySQLConnection;
 import com.softserve.ita.demo1.entities.BlackList;
-import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class BlackListDAOImpl implements BlackListDAO {
 
-    private static final Logger LOGGER = Logger.getLogger(BlackListDAOImpl.class);
+    private static final Logger LOGGER = LogManager.getLogger("DaoLogger");
+
     private Connection connection = MySQLConnection.getConnection();
 
     @Override

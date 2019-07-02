@@ -9,19 +9,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
-import static java.util.logging.Level.SEVERE;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public class AuntificationDAOImpl implements AuntificationDAO {
 
-    private final Logger LOGGER;
+    private static final Logger LOGGER = LogManager.getLogger("DaoLogger");
     private Connection connection = MySQLConnection.getConnection();
 
-    public AuntificationDAOImpl() {
-        LOGGER = LogManager.getLogger("DaoLogger");
-    }
     @Override
     public void delete(String selector) throws DAOException {
         String query = "DELETE FROM auntification WHERE selector = ?";
@@ -31,7 +29,7 @@ public class AuntificationDAOImpl implements AuntificationDAO {
             statement.execute();
 
         } catch (SQLException e){
-            LOGGER.log(Logger.ERROR,"Cannot execute delete in Auntification Dao");
+            LOGGER.error("Cannot execute delete in Auntification Dao");
             System.out.println("Cannot execute delete in Auntification Dao");
             throw new DAOException("Cannot execute delete in Auntification Dao");
         }

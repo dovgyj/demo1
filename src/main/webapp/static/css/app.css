@@ -8,7 +8,7 @@
 }
 
 .about__img{
-    width: 90%;
+    width: 100%;
     margin: auto;
     display: block;
 }
@@ -134,13 +134,13 @@
 
 .item-img{
     max-width: 100%;
-    height: 600px;
     display: block;
 }
 
 .item{
     padding: 10px 20px;
     background: #ffffff;
+    /*width: 80%;*/
 }
 
 .item__title{
@@ -173,6 +173,19 @@
     height: 251px;
     width: 90%;
     margin: auto;
+}
+
+.home-card__title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.home-card__text{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 .home-card-container{
