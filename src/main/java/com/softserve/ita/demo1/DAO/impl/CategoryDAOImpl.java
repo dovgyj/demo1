@@ -11,12 +11,12 @@ import com.softserve.ita.demo1.DAO.exception.DAOException;
 import com.softserve.ita.demo1.DAO.interfaces.CategoryDAO;
 import com.softserve.ita.demo1.db.MySQLConnection;
 import com.softserve.ita.demo1.entities.Category;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CategoryDAOImpl implements CategoryDAO {
 
-    private static final Logger LOGGER = LogManager.getLogger("DaoLogger");
+    private static final Logger LOGGER = LoggerFactory.getLogger(CategoryDAOImpl.class);
 
     private Connection connection = MySQLConnection.getConnection();
 

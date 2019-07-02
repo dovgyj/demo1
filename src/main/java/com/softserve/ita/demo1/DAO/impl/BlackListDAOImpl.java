@@ -1,6 +1,7 @@
 package com.softserve.ita.demo1.DAO.impl;
 
 import com.softserve.ita.demo1.DAO.exception.DAOException;
+import org.slf4j.LoggerFactory;
 import com.softserve.ita.demo1.DAO.interfaces.BlackListDAO;
 import com.softserve.ita.demo1.db.MySQLConnection;
 import com.softserve.ita.demo1.entities.BlackList;
@@ -8,12 +9,11 @@ import com.softserve.ita.demo1.entities.BlackList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 
 public class BlackListDAOImpl implements BlackListDAO {
 
-    private static final Logger LOGGER = LogManager.getLogger("DaoLogger");
+    private static final Logger LOGGER = LoggerFactory.getLogger(BlackListDAOImpl.class);
 
     private Connection connection = MySQLConnection.getConnection();
 

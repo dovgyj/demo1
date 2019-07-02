@@ -5,8 +5,8 @@ import com.softserve.ita.demo1.DAO.interfaces.OrderDAO;
 import com.softserve.ita.demo1.db.MySQLConnection;
 import com.softserve.ita.demo1.entities.Item;
 import com.softserve.ita.demo1.entities.Order;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class OrderDAOImpl implements OrderDAO {
 
-    private static final Logger LOGGER = LogManager.getLogger("DaoLogger");
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderDAOImpl.class);
 
     private Connection connection = MySQLConnection.getConnection();
 

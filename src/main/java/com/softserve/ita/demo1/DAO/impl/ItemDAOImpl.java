@@ -4,8 +4,8 @@ import com.softserve.ita.demo1.DAO.exception.DAOException;
 import com.softserve.ita.demo1.DAO.interfaces.ItemDAO;
 import com.softserve.ita.demo1.db.MySQLConnection;
 import com.softserve.ita.demo1.entities.Item;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ItemDAOImpl implements ItemDAO {
 
-    private static final Logger LOGGER = LogManager.getLogger("DaoLogger");
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemDAOImpl.class);
     private Connection connection = MySQLConnection.getConnection();
 
     @Override

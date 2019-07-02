@@ -1,14 +1,15 @@
 package com.softserve.ita.demo1.db;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.*;
 import java.util.TimeZone;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class MySQLConnection {
 
-    private static final Logger LOGGER = LogManager.getLogger("DaoLogger");
+    private static final Logger LOGGER = LoggerFactory.getLogger("DaoLogger");
 
     private static final String CLASS = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/mydb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";

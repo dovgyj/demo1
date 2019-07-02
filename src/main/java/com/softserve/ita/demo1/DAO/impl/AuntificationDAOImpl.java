@@ -11,13 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class AuntificationDAOImpl implements AuntificationDAO {
 
-    private static final Logger LOGGER = LogManager.getLogger("DaoLogger");
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuntificationDAOImpl.class);
     private Connection connection = MySQLConnection.getConnection();
 
     @Override
